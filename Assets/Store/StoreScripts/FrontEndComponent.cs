@@ -5,40 +5,44 @@ using UnityEngine;
 public class FrontEndComponent : MonoBehaviour
 {
 
-    public Collider input;
-/*
-    public Collider input;
-    public Collider output;
-*/
+   
+    public Collider collider;
     // Start is called before the first frame update
     void Start()
     {
-       // print("Hey!");
-       // Debug.Log("hey this works btw!!!");
+       
     }
 
 
 
-    private void OnCollisionEnter(Collision input)
+    private void OnCollisionEnter(Collision collision)
     {
-        print("Got to OnCollisionEnter");
-        print(input.gameObject.transform.name);
         
-        
-        if (input.gameObject.name == "TestCube")
-        {
-            print("Hey!");
-            print(input.gameObject.name);
-            Debug.Log(input.gameObject.name);
-        }
-        if (input.gameObject.tag == "BreadBoardHoles")
-        {
-            print("Hey!");
-            print(input.gameObject.name);
-            Debug.Log(input.gameObject.name);
-        }
+        print("ONCollision Enter:   " + collision.gameObject.name);
+        print("ONCollision Enter Collider Name:   " + collider.name);
+        print("Parent Name:   " + collider.transform.parent.name);
+
+
+
 
     }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+       
+        print("On Trigger Enter: " + other.gameObject.name);
+        print("On Trigger Enter Collider Name:   " + collider.name);
+        print("Parent Name:   " + collider.transform.parent.Find("Out").name);
+
+    }
+    //  Create Central script in Resistor
+    //  Create script for nodes
+    //      Nodes will send name and hole name to Central Script
+    //  Central Script sends data to Spice Sharp Component Dictionary
+    
+
+   
+    /*
     private void OnCollisionStay(Collision col)
     {
         print("Got to OnCollisionStay");
@@ -59,7 +63,7 @@ public class FrontEndComponent : MonoBehaviour
         }
 
     }
-
+    */
 
     /*   private void OnCollisionEnter(Collision collision)
        {
