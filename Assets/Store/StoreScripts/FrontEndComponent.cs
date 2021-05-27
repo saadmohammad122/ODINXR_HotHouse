@@ -7,6 +7,8 @@ public class FrontEndComponent : MonoBehaviour
 
    
     public Collider collider;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,7 @@ public class FrontEndComponent : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
        
+
         print("On Trigger Enter: " + other.gameObject.name);
         print("On Trigger Enter Collider Name:   " + collider.name);
         print("Parent Name:   " + collider.transform.parent.Find("Out").name);
@@ -64,17 +67,6 @@ public class FrontEndComponent : MonoBehaviour
 
     }
     */
-
-    /*   private void OnCollisionEnter(Collision collision)
-       {
-           foreach(ContactPoint contact in collision.contacts)
-           {
-               print(contact.thisCollider.name + " hit " + contact.otherCollider.name);
-               Debug.DrawRay(contact.point, contact.normal, Color.white);
-           }
-       }
-    */
-
 
 
     // Update is called once per frame
