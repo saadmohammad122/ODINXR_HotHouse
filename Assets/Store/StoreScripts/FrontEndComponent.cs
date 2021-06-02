@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FrontEndComponent : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
