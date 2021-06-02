@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class SnapLocation : MonoBehaviour
 {
-    // The offset seems to be about .03f in each direction,
-    //  this should be checked for each scenario b/c we may be able
-    //  to use a constant offset.
-    public Vector3 offset;
 
-    // Start is called before the first frame update
+    public float lowX;
+    public float highX;
+    public float lowZ;
+    public float highZ;
+    public float midHighZ;
+    public float midLowZ;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -27,7 +28,12 @@ public class SnapLocation : MonoBehaviour
         {
             ObjectController component = other.gameObject.GetComponent<ObjectController>();
             component.inGrid = true;
-            component.offset = offset;
+            component.lowX = lowX;
+            component.highX = highX;
+            component.lowZ = lowZ;
+            component.highZ = highZ;
+            component.midHighZ = midHighZ;
+            component.midLowZ = midLowZ;
         }  
     }
 
@@ -37,7 +43,12 @@ public class SnapLocation : MonoBehaviour
         {
             ObjectController component = other.gameObject.GetComponent<ObjectController>();
             component.inGrid = false;
-            component.offset = new Vector3(0, 0, 0);
+            component.lowX = 0;
+            component.highX = 0;
+            component.lowZ = 0;
+            component.highZ = 0;
+            component.midHighZ = 0;
+            component.midLowZ = 0;
         }
     }
 }

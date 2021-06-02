@@ -8,11 +8,20 @@ public class ObjectController : MonoBehaviour
     public bool inGrid;
     public bool isHeld;
     public bool hovering;
-    public Vector3 offset = new Vector3(0, 0, 0);
-    private float size = 0.3f;
+    public Vector3 offset;
+    private float size = 0.03f;
+
+    // For calculating the bounds of the placement of the object
+    // Set in SnapLocation.cs
+    public float lowX;
+    public float highX;
+    public float lowZ;
+    public float highZ;
+    public float midHighZ;
+    public float midLowZ;
 
     public Transform hover;
-    private Transform newHover;
+    Transform newHover;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +34,12 @@ public class ObjectController : MonoBehaviour
     {
         if (inGrid)
             snap();
+
+        if (!inGrid && newHover != null)
+        {
+            Destroy(newHover.gameObject);
+            hovering = false;
+        }
     }
 
     private void snap()
@@ -42,15 +57,36 @@ public class ObjectController : MonoBehaviour
         //  can vary between parts so we can make them more specific.
         Vector3 position =
             new Vector3(
-                Mathf.RoundToInt(transform.position.x / size) * size,
+                Mathf.RoundToInt(transform.position.x / size) * size + offset.x,
                 0.85f,
-                Mathf.RoundToInt(transform.position.z / size) * size);
+                Mathf.RoundToInt(transform.position.z / size) * size + offset.z);
+
+        // The bounds for the grid are set here.  The bounds need to be inputted
+        //  for each grid.  They go into the snapLocation section of the grid.
+
+        // End x bounds
+        if (position.x > highX)
+            position.x = highX;
+        else if (position.x < lowX)
+            position.x = lowX;
+
+        // End z bounds
+        if (position.z > highZ)
+            position.z = highZ;
+        else if (position.z < lowZ)
+            position.z = lowZ;
+
+        // Mid z bounds (The strip with no nodes in the center)
+        if (position.z > midLowZ && position.z < midHighZ)
+        {
+            Debug.Log("In the middle");
+        }
 
         if (!isHeld)
         {
             if (hovering)
             {
-                Destroy(newHover);
+                Destroy(newHover.gameObject);
                 hovering = false;
             }
             transform.eulerAngles = placementAngle;
@@ -66,6 +102,11 @@ public class ObjectController : MonoBehaviour
         {
             newHover = Instantiate(hover, position, Quaternion.Euler(placementAngle));
             hovering = true;
+        }
+        else
+        {
+            Destroy(newHover.gameObject);
+            newHover = Instantiate(hover, position, Quaternion.Euler(placementAngle));
         }
     }
 

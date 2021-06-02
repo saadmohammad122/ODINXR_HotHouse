@@ -66,6 +66,11 @@ public class PlayerController : MonoBehaviour
         else
         {
             component.transform.position = hand.transform.position + FPCam.transform.forward * objectSize;
+            var placementAngle = transform.eulerAngles;
+            placementAngle.x = 0f;
+            placementAngle.y = hand.transform.eulerAngles.y - 90f;
+            placementAngle.z = 90f;
+            component.transform.localEulerAngles = placementAngle;
         }
     }
 
@@ -76,19 +81,19 @@ public class PlayerController : MonoBehaviour
 
         // To ensure that the component rotates w/ the player, make the player
         //  its parent so player rotation will affect component rotation
-        component.transform.parent = FPCam.transform;
+        //component.transform.parent = FPCam.transform;
 
         // Turn these off so that the component does not move once in the players hand
         component.GetComponent<Rigidbody>().useGravity = false;
-        component.GetComponent<Rigidbody>().isKinematic = false;
+        component.GetComponent<Rigidbody>().isKinematic = true;
     }
 
     private ObjectController ReleaseObject(ObjectController component)
     {
         component.GetComponent<Rigidbody>().useGravity = true;
-        component.GetComponent<Rigidbody>().isKinematic = true;
+        component.GetComponent<Rigidbody>().isKinematic = false;
         component.isHeld = false;
-        component.transform.parent = null;
+        //component.transform.parent = null;
 
         return null;
     }
