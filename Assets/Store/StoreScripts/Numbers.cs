@@ -6,15 +6,15 @@ using UnityEngine;
 public class Numbers : MonoBehaviour
 {
 
-
-    public int ResistorValue = 100;
+    
+    public int Value = 100;
     public int RandomInt = 55;
     public string Type;
-
+    public string UniqueName;
     // Start is called before the first frame update
     void Start()
     {
-        
+         
     }
 
     // Update is called once per frame

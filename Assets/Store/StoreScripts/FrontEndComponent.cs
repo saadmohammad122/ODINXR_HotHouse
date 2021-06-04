@@ -7,12 +7,13 @@ public class FrontEndComponent : MonoBehaviour
 
    
     public Collider collider;
-
+    
 
     // Start is called before the first frame update
     void Start()
     {
-       
+        //var NodeScript = this.GetComponent<>();
+
     }
 
 

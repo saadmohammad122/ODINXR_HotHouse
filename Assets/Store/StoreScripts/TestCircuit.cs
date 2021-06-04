@@ -15,12 +15,12 @@ public class TestCircuit : MonoBehaviour
     public int index = 3;
     public string InNode = "in";
     public string OutNode = "out";
-    public string PreviousOutput = "NULL"; 
+    public string PreviousOutput = "NULL";
 
 
-    class MyComponent 
+    class MyComponent
     {
-        
+
         public SpiceSharp.Components.Component resistor { get; set; }
     }
 
@@ -32,38 +32,38 @@ public class TestCircuit : MonoBehaviour
 
     void Start()
     {
-       
+
     }
 
     // Update is called once per frame
     void Update()
     {
-    if (Input.GetMouseButtonDown(0))
-    {
-        var ray = fpsCam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Input.GetMouseButtonDown(0))
         {
-            if (hit.collider != null)
+            var ray = fpsCam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
             {
-                var cktScript = this.GetComponent<mycircuits>();
-                if (hit.collider.name == goCube.name)
+                if (hit.collider != null)
                 {
-                    cktScript.outText.text = "Output: ";
-                    cktScript.dcSweep.Run(cktScript.ckt);
-                }
+                    var cktScript = this.GetComponent<mycircuits>();
+                    if (hit.collider.name == goCube.name)
+                    {
+                        cktScript.outText.text = "Output: ";
+                        cktScript.dcSweep.Run(cktScript.ckt);
+                    }
 
-                else if (hit.collider.name == AddResistor.name)
-                {
-                    print("Hello! button pressed!");  
-                    PreviousOutput = "r" + (index - 1);
-                    cktArray.Add("r" + index, new Resistor("r" + index, PreviousOutput, OutNode + index, 1.0e4));
-                    index += 1;
-                    print("This is the index:   " + index);
-                    cktScript.printComps();
+                    else if (hit.collider.name == AddResistor.name)
+                    {
+                        print("Hello! button pressed!");
+                        PreviousOutput = "r" + (index - 1);
+                        cktArray.Add("r" + index, new Resistor("r" + index, PreviousOutput, OutNode + index, 1.0e4));
+                        index += 1;
+                        print("This is the index:   " + index);
+                        cktScript.printComps();
+                    }
                 }
             }
         }
-    }
     }
 }

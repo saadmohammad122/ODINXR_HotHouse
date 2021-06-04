@@ -39,6 +39,7 @@ public class mycircuits : MonoBehaviour
 
         compText.text = "Components:";
         compText.text += "\nVoltage Source: " + v1.Parameters.DcValue.Value;
+ 
         compText.text += "\nResistor 1: " + r1.Parameters.Resistance.Value;
         compText.text += "\nResistor 2: " + r2.Parameters.Resistance.Value;
     }
