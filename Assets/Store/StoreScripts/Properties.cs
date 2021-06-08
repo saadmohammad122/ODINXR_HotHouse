@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Numbers : MonoBehaviour
+public class Properties : MonoBehaviour
 {
 
     

@@ -8,6 +8,8 @@ public class NodeScript : MonoBehaviour
 
     public Collider collider;
     public bool isColliding = false;
+    public bool FreeFall = true;
+    public float time = .03f;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,31 +28,50 @@ public class NodeScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isColliding == false)
+        if (other.GetComponent<HoleScript>() != null)
         {
+            FreeFall = false;
             var componentScript = this.GetComponentInParent<ComponentScript>();
+            Rigidbody physicalBody = componentScript.component.GetComponent<Rigidbody>();
 
-            string nodeLocation = other.gameObject.name;
-            string name = collider.name;
-            print("Got to OnTriggerEnter!");
-            // figure out how to prevent double entries in List. Maybe switch to Dictionary
+
+            string nodeLocation = other.GetComponent<HoleScript>().UniqueName;
+            //string name = collider.name;
+            string name = this.name;
+
+            // Idea 2: put rigidbody on end colldiers 
+
+
             if (!componentScript.NodeList.ContainsKey(name))
             {
+                print("Got to freezing the body");
+
+                //RigidbodyConstraints physicalBodyConstraints = componentScript.component.GetComponent<RigidbodyConstraints>();
+
                 componentScript.NodeList.Add(name, nodeLocation);
-                componentScript.component.GetComponent<Rigidbody>().useGravity = false;
-                componentScript.component.GetComponent<Rigidbody>().isKinematic = true;
-                componentScript.component.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                componentScript.component.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                physicalBody.useGravity = false;
+
+                physicalBody.velocity = Vector3.zero;
+                physicalBody.angularVelocity = Vector3.zero;
+                //physicalBodyConstraints = RigidbodyConstraints.FreezePositionY;
+                physicalBody.constraints = RigidbodyConstraints.FreezePositionY;
+                physicalBody.isKinematic = true;
+                //componentScript.component.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                //  componentScript.component.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
                 //Vector3 stopInPlace = new Vector3(componentScript.component.transform.position.x, (float)0.86, componentScript.component.transform.position.z);
-               // componentScript.component.transform.position = stopInPlace; 
+                //Vector3 stopInPlace = new Vector3(componentScript.component.transform.position.x, 0.86f, componentScript.component.transform.position.z);
+
+                //componentScript.component.transform.localPosition = stopInPlace; 
+
+            }
+            //  Above code will have to be reviewed after seeing the snap function
+            // Vector3 stopInPlace = new Vector3(componentScript.component.transform.position.x, (float) 0.86, componentScript.component.transform.position.z);
+            //  componentScript.component.transform.position = stopInPlace; 
 
         }
-        //  Above code will have to be reviewed after seeing the snap function
-        // Vector3 stopInPlace = new Vector3(componentScript.component.transform.position.x, (float) 0.86, componentScript.component.transform.position.z);
-        //  componentScript.component.transform.position = stopInPlace; 
 
-        isColliding = true;
-        }
+
 
 
     }
@@ -58,15 +79,37 @@ public class NodeScript : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         return;
-        print("Got to on trigger exit");
-        var componentScript = this.GetComponentInParent<ComponentScript>();
-        componentScript.ClearData = true;
+        if (other.GetComponent<HoleScript>() != null)
+        {
+            print("Got to on trigger exit");
+            var componentScript = this.GetComponentInParent<ComponentScript>();
+            componentScript.ClearData = true;
+            isColliding = false;
+            string nodeLocation = other.GetComponent<HoleScript>().UniqueName;
+            //string name = collider.name;
+            string name = this.name;
+
+            print("EXIT_name:  " + name); // check names of what is being hit
+            print("EXIT_nodeLocation:  " + nodeLocation);
+        }
+
+
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (FreeFall == false)
+        {
+            var componentScript = this.GetComponentInParent<ComponentScript>();
+            Rigidbody physicalBody = componentScript.component.GetComponent<Rigidbody>();
+            physicalBody.useGravity = false;
+            physicalBody.velocity = Vector3.zero;
+            physicalBody.angularVelocity = Vector3.zero;
+            //physicalBodyConstraints = RigidbodyConstraints.FreezePositionY;
+            physicalBody.constraints = RigidbodyConstraints.FreezeAll;
+
+        }
     }
 }

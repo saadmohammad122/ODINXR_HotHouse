@@ -76,7 +76,7 @@ public class ComponentScript : MonoBehaviour
 
     private void SendDataToCircuitCreator()
     {
-        var Attributes = this.GetComponentInParent<Numbers>();
+        var Attributes = this.GetComponentInParent<Properties>();
         string ComponentType = Attributes.Type;
         int ComponentValue = Attributes.Value;
         SpiceSharp.Components.Component newComponent;

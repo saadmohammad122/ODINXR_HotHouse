@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoardScipt : MonoBehaviour
+public class HoleScript : MonoBehaviour
 {
     public string UniqueName;
     Collider ColliderBox; 
@@ -10,7 +10,7 @@ public class BoardScipt : MonoBehaviour
     void Start()
     {
         UniqueName = this.name + transform.parent.name + transform.parent.parent.name + transform.parent.parent.parent.name;
-        print("UniqueName is : " + UniqueName);
+        
 
         ColliderBox = GetComponent<BoxCollider>();
         ColliderBox.isTrigger = false;

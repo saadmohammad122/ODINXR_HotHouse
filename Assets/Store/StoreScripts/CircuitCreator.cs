@@ -34,6 +34,7 @@ public class CircuitCreator : MonoBehaviour
             {
                 // rerun spicesharp
 
+
                 CircuitCount = ListOfComponents.Count;
                  
             }
