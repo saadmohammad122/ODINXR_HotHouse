@@ -5,11 +5,6 @@ using UnityEngine;
 public class SnapLocation : MonoBehaviour
 {
 
-    public float lowX;
-    public float highX;
-    public float lowZ;
-    public float highZ;
-
     void Start()
     {
         
@@ -22,7 +17,7 @@ public class SnapLocation : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("Stay");
+        Debug.Log(other.name + " is in the grid");
         if (other.gameObject.tag == "Resistor")
         {
             ObjectController component = other.gameObject.GetComponent<ObjectController>();
