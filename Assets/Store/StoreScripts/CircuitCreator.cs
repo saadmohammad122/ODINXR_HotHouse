@@ -36,7 +36,7 @@ public class CircuitCreator : MonoBehaviour
 
 
                 CircuitCount = ListOfComponents.Count;
-                 
+                
             }
             /*
             foreach (var p in ListOfComponents)

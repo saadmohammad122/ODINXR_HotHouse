@@ -23,11 +23,12 @@ public class SpiceSharpBackend : MonoBehaviour  // All spicesharp functions are 
      * 
      * 5. Figure out snap in place
      */
-
+    
     void Start()
     {
         // Create a Circuit that has a positive and a neutral
             // Up to the player to connect to the positive and the neutrals. 
+
         
     }
 

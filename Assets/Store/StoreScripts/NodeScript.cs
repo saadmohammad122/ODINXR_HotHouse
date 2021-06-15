@@ -26,6 +26,22 @@ public class NodeScript : MonoBehaviour
 
     }
 
+
+    /*
+     * Snap in Place: 
+     *      1. Picking the object up
+     *      2. Attaching Object to breadboard
+     *      
+     * 
+     * 
+     * 
+     * 
+     */
+
+
+
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<HoleScript>() != null)
@@ -95,7 +111,14 @@ public class NodeScript : MonoBehaviour
 
 
     }
+    // Idea 1: Catch OntriggerExit the first time, and do nothing.
+    //          Second time it goes off, report an exit to the board.
+    //      Cons: wont stop it from speeding through the board. 
+    //      Pros: 
 
+    //  Idea 2: OnCollision Enter reacts instantaently,
+    //          OnTriggerExit, thin cube above collsionbox that is changed to a trigger when OnCollisionEnter is used.
+    //  
 
     // Update is called once per frame
     void Update()
