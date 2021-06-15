@@ -9,8 +9,6 @@ public class SnapLocation : MonoBehaviour
     public float highX;
     public float lowZ;
     public float highZ;
-    public float midHighZ;
-    public float midLowZ;
 
     void Start()
     {
@@ -22,8 +20,9 @@ public class SnapLocation : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
+        Debug.Log("Stay");
         if (other.gameObject.tag == "Resistor")
         {
             ObjectController component = other.gameObject.GetComponent<ObjectController>();
@@ -32,8 +31,6 @@ public class SnapLocation : MonoBehaviour
             component.highX = highX;
             component.lowZ = lowZ;
             component.highZ = highZ;
-            component.midHighZ = midHighZ;
-            component.midLowZ = midLowZ;
         }  
     }
 
@@ -47,8 +44,6 @@ public class SnapLocation : MonoBehaviour
             component.highX = 0;
             component.lowZ = 0;
             component.highZ = 0;
-            component.midHighZ = 0;
-            component.midLowZ = 0;
         }
     }
 }

@@ -17,8 +17,6 @@ public class ObjectController : MonoBehaviour
     public float highX;
     public float lowZ;
     public float highZ;
-    public float midHighZ;
-    public float midLowZ;
 
     public Transform hover;
     Transform newHover;
@@ -76,11 +74,6 @@ public class ObjectController : MonoBehaviour
         else if (position.z < lowZ)
             position.z = lowZ;
 
-        // Mid z bounds (The strip with no nodes in the center)
-        if (position.z > midLowZ && position.z < midHighZ)
-        {
-            Debug.Log("In the middle");
-        }
 
         if (!isHeld)
         {
