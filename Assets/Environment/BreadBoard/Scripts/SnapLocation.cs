@@ -17,7 +17,6 @@ public class SnapLocation : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.gameObject.tag + " In Grid");
         if (other.gameObject.tag == "Resistor")
         {
             ObjectController component = other.gameObject.GetComponent<ObjectController>();

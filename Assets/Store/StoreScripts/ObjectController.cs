@@ -47,6 +47,14 @@ public class ObjectController : MonoBehaviour
         var placementAngle = transform.eulerAngles;
         placementAngle.x = 0f;
         placementAngle.y = Mathf.Round(transform.eulerAngles.y / 90) * 90;
+
+        // Slightly different offsets needed for the rotations, so set
+        //  appropriate offset if piece is rotated
+        if (placementAngle.y % 180 == 0)
+        {
+            offset.x = 0;
+        }
+
         placementAngle.z = 90f;
 
         // My desire for position is to contain an offset within
@@ -56,7 +64,7 @@ public class ObjectController : MonoBehaviour
         Vector3 position =
             new Vector3(
                 Mathf.RoundToInt(transform.position.x / size) * size + offset.x,
-                0.85f,
+                0.84f,
                 Mathf.RoundToInt(transform.position.z / size) * size + offset.z);
 
         // The bounds for the grid are set here.  The bounds need to be inputted
