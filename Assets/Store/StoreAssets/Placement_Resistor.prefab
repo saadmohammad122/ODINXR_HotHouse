@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 1806996909346855897}
   - component: {fileID: 2692807793670772861}
   - component: {fileID: 2913120223483048279}
-  - component: {fileID: 9153662126081510680}
-  - component: {fileID: 6376132982144085371}
+  - component: {fileID: 8586230023353486943}
+  - component: {fileID: 7169286466311545736}
   m_Layer: 0
   m_Name: Placement_Resistor
   m_TagString: Untagged
@@ -126,7 +126,7 @@ MonoBehaviour:
   RandomInt: 55
   Type: Resistor
   UniqueName: 
---- !u!114 &9153662126081510680
+--- !u!114 &8586230023353486943
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,24 +135,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 149536249851853324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc0df7021c9cdf04bacf2dffca951168, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numOfInputs: 2
-  component: {fileID: 149536249851853324}
-  DataHasBeenSent: 0
-  ClearData: 0
-  ComponentName: 
---- !u!114 &6376132982144085371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 149536249851853324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aba096fefffc0224a886fca55155de45, type: 3}
+  m_Script: {fileID: 11500000, guid: 27b585dfe45f8486092a478d889de1db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inGrid: 0
@@ -164,6 +147,23 @@ MonoBehaviour:
   lowZ: 0
   highZ: 0
   hover: {fileID: 4083109213067448850, guid: eaa24d3621aed564994330a498f6bfad, type: 3}
+--- !u!114 &7169286466311545736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149536249851853324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3821f97b4e9bf47158eb6877370a436f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numOfInputs: 2
+  component: {fileID: 149536249851853324}
+  DataHasBeenSent: 0
+  ClearData: 0
+  ComponentName: 
 --- !u!1 &493027559046761269
 GameObject:
   m_ObjectHideFlags: 0
