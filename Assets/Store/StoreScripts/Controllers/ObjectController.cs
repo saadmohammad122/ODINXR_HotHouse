@@ -64,7 +64,7 @@ public class ObjectController : MonoBehaviour
             Vector3 position =
                 new Vector3(
                     Mathf.RoundToInt(transform.position.x / size) * size + offset.x,
-                    0.84f,
+                    0.84f + offset.y,
                     Mathf.RoundToInt(transform.position.z / size) * size + offset.z);
 
             // The bounds for the grid are set here.  The bounds need to be inputted
@@ -112,3 +112,4 @@ public class ObjectController : MonoBehaviour
         }
 
     }
+

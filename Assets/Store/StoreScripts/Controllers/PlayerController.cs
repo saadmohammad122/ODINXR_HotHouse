@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         GrabObject();
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && component != null)
         {
             component = ReleaseObject(component);
         }
@@ -94,10 +94,6 @@ public class PlayerController : MonoBehaviour
     {
         objectSize = component.GetComponent<Renderer>().bounds.size.magnitude;
         component.isHeld = true;
-
-        // To ensure that the component rotates w/ the player, make the player
-        //  its parent so player rotation will affect component rotation
-        //component.transform.parent = FPCam.transform;
 
         // Turn these off so that the component does not move once in the players hand
         component.GetComponent<Rigidbody>().useGravity = false;
