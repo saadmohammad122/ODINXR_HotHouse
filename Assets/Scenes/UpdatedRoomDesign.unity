@@ -19787,6 +19787,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnerContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 6013423503432139573, guid: c2dee0152b2a743e997ef5cbd5f55087,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6013423503432139579, guid: c2dee0152b2a743e997ef5cbd5f55087,
         type: 3}
       propertyPath: m_RootOrder
