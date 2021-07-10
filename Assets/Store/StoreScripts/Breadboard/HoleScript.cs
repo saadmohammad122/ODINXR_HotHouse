@@ -5,6 +5,7 @@ using UnityEngine;
 public class HoleScript : MonoBehaviour {
         public string UniqueName;
         Collider ColliderBox;
+        ///public string Colliderbox
         // Start is called before the first frame update
         void Start()
         {
