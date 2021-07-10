@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 149536249851853324}
   m_LocalRotation: {x: 0.50000006, y: 0.50000006, z: -0.49999997, w: -0.49999994}
   m_LocalPosition: {x: -0.0149, y: 0.244, z: -0.0578}
-  m_LocalScale: {x: -1, y: -1, z: -2.096598}
+  m_LocalScale: {x: 1, y: 1, z: 1.6}
   m_Children:
   - {fileID: 6396425083119896078}
   - {fileID: 1367369889289216694}
@@ -147,6 +147,7 @@ MonoBehaviour:
   highX: 0
   lowZ: 0
   highZ: 0
+  lowY: 0
   hover: {fileID: 4083109213067448850, guid: eaa24d3621aed564994330a498f6bfad, type: 3}
 --- !u!114 &7169286466311545736
 MonoBehaviour:

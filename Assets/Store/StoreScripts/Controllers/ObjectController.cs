@@ -17,20 +17,15 @@ public class ObjectController : MonoBehaviour
         public float highX;
         public float lowZ;
         public float highZ;
+        public float lowY;
 
         public Transform hover;
         Transform newHover;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
         // Update is called once per frame
         void Update()
         {
-            if (inGrid)
+            if (inGrid && (isHeld || hovering))
                 snap();
 
             if (!inGrid && newHover != null)
@@ -61,28 +56,8 @@ public class ObjectController : MonoBehaviour
             //  each snaplocation.  When a resistor enters the trigger,
             //  it then assigns an offset.  This is good bc the offsets
             //  can vary between parts so we can make them more specific.
-            Vector3 position =
-                new Vector3(
-                    Mathf.RoundToInt(transform.position.x / size) * size + offset.x,
-                    0.84f + offset.y,
-                    Mathf.RoundToInt(transform.position.z / size) * size + offset.z);
-
-            // The bounds for the grid are set here.  The bounds need to be inputted
-            //  for each grid.  They go into the snapLocation section of the grid.
-
-            // End x bounds
-            if (position.x > highX)
-                position.x = highX;
-            else if (position.x < lowX)
-                position.x = lowX;
-
-            // End z bounds
-            if (position.z > highZ)
-                position.z = highZ;
-            else if (position.z < lowZ)
-                position.z = lowZ;
-
-
+            Vector3 position = BreadboardPosition();
+            
             if (!isHeld)
             {
                 if (hovering)
@@ -111,5 +86,30 @@ public class ObjectController : MonoBehaviour
             }
         }
 
+        private Vector3 BreadboardPosition()
+        {
+        Vector3 position =
+                new Vector3(
+                    Mathf.RoundToInt(transform.position.x / size) * size + offset.x,
+                    lowY + offset.y,
+                    Mathf.RoundToInt(transform.position.z / size) * size + offset.z);
+
+        // The bounds for the grid are set here.  The bounds need to be inputted
+        //  for each grid.  They go into the snapLocation section of the grid.
+
+        // End x bounds
+        if (position.x > highX)
+            position.x = highX;
+        else if (position.x < lowX)
+            position.x = lowX;
+
+        // End z bounds
+        if (position.z > highZ)
+            position.z = highZ;
+        else if (position.z < lowZ)
+            position.z = lowZ;
+
+        return position;
+        }
     }
 

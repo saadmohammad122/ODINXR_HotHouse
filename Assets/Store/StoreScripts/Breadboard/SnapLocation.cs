@@ -15,6 +15,7 @@ public class SnapLocation : MonoBehaviour
                 component.highX = this.GetComponent<Collider>().bounds.max.x;
                 component.lowZ = this.GetComponent<Collider>().bounds.min.z;
                 component.highZ = this.GetComponent<Collider>().bounds.max.z;
+                component.lowY = this.GetComponent<Collider>().bounds.min.y;
             }
         }
 
