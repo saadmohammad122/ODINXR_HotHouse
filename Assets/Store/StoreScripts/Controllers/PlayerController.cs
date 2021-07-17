@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
     {
         objectSize = component.GetComponent<Renderer>().bounds.size.magnitude;
         component.isHeld = true;
+        DeactivateObject(component);
 
         // Turn these off so that the component does not move once in the players hand
         component.GetComponent<Rigidbody>().useGravity = false;
@@ -105,6 +106,7 @@ public class PlayerController : MonoBehaviour
         component.GetComponent<Rigidbody>().useGravity = true;
         component.GetComponent<Rigidbody>().isKinematic = false;
         component.isHeld = false;
+        ActivateOdject(component);
         //component.transform.parent = null;
 
         return null;
@@ -116,5 +118,15 @@ public class PlayerController : MonoBehaviour
         var angle = component.transform.eulerAngles;
         angle.y = rotationAngle;
         component.transform.eulerAngles = angle;
+    }
+
+    public void DeactivateObject(ObjectController component)
+    {
+        component.GetComponent<CollisionDetecion>().enabled = false;
+    }
+
+    public void ActivateOdject(ObjectController component)
+    {
+        component.GetComponent<CollisionDetecion>().enabled = true;
     }
 }
