@@ -56,8 +56,33 @@ public class ObjectController : MonoBehaviour
             //  each snaplocation.  When a resistor enters the trigger,
             //  it then assigns an offset.  This is good bc the offsets
             //  can vary between parts so we can make them more specific.
+<<<<<<< HEAD
             Vector3 position = BreadboardPosition();
             
+=======
+            Vector3 position =
+                new Vector3(
+                    Mathf.RoundToInt(transform.position.x / size) * size + offset.x,
+                    0.84f,
+                    Mathf.RoundToInt(transform.position.z / size) * size + offset.z);
+
+            // The bounds for the grid are set here.  The bounds need to be inputted
+            //  for each grid.  They go into the snapLocation section of the grid.
+
+            // End x bounds
+            if (position.x > highX)
+                position.x = highX;
+            else if (position.x < lowX)
+                position.x = lowX;
+
+            // End z bounds
+            if (position.z > highZ)
+                position.z = highZ;
+            else if (position.z < lowZ)
+                position.z = lowZ;
+
+
+>>>>>>> parent of 39afb30 (Finalized)
             if (!isHeld)
             {
                 if (hovering)
@@ -112,4 +137,3 @@ public class ObjectController : MonoBehaviour
         return position;
         }
     }
-

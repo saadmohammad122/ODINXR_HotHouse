@@ -5,6 +5,16 @@ using UnityEngine;
 public class SnapLocation : MonoBehaviour
     {
 
+        void Start()
+        {
+
+        }
+
+        void Update()
+        {
+
+        }
+
         private void OnTriggerStay(Collider other)
         {
             if (other.gameObject.tag == "Resistor")
