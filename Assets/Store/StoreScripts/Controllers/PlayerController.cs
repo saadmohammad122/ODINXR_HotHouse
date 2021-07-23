@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
 
     public PlayerMenu menu;
 
+    private readonly int maxDistance = 100;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,33 +49,27 @@ public class PlayerController : MonoBehaviour
          *           the circuit grid under layer 6.  If we set the layer
          *           mask to represent layer 6 and then invert it to work
          *           for everything but layer 6, we can "look through it" */
+        Ray mousePointer = FPCam.ScreenPointToRay(Input.mousePosition);
 
         int layerMask = 1 << 6;
         layerMask = ~layerMask;
-
-        Ray mousePointer = FPCam.ScreenPointToRay(Input.mousePosition);
-        int maxDistance = 100;
 
         if (component == null)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                // Old way of using the raycast
-                //if (Physics.Raycast(mousePointer, out hit))
-
-                // New way of using raycast
-                // We are also setting the maxDistance the raycast will go, which is nice
                 if (Physics.Raycast(mousePointer, out hit, maxDistance, layerMask))
                 {
+                    // Check to see if hit component
                     if (hit.transform.gameObject.GetComponent<ObjectController>() != null)
                     {
                         component = hit.transform.gameObject.GetComponent<ObjectController>();
                         HitComponent(component);
                     }
-                    else if (menu.isPaused)
+
+                    // Check to see if clicked button
+                    else
                     {
-                        // If we don't hit a component, we should check if we
-                        //  hit a button while paused
                         MenuController mc = gameObject.GetComponent<MenuController>();
                         mc.checkButton(hit);
                     }
