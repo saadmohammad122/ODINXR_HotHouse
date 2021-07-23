@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 2913120223483048279}
   - component: {fileID: 8586230023353486943}
   - component: {fileID: 7169286466311545736}
+  - component: {fileID: 7685730236275508665}
   m_Layer: 0
   m_Name: Placement_Resistor
-  m_TagString: Untagged
+  m_TagString: Resistor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 149536249851853324}
   m_LocalRotation: {x: 0.50000006, y: 0.50000006, z: -0.49999997, w: -0.49999994}
   m_LocalPosition: {x: -0.0149, y: 0.244, z: -0.0578}
-  m_LocalScale: {x: 1, y: 1, z: 1.6}
+  m_LocalScale: {x: -1, y: -1, z: -2.096598}
   m_Children:
   - {fileID: 6396425083119896078}
   - {fileID: 1367369889289216694}
@@ -141,12 +142,11 @@ MonoBehaviour:
   inGrid: 0
   isHeld: 0
   hovering: 0
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: -0.005, z: 0.0133}
   lowX: 0
   highX: 0
   lowZ: 0
   highZ: 0
-  lowY: 0
   hover: {fileID: 4083109213067448850, guid: eaa24d3621aed564994330a498f6bfad, type: 3}
 --- !u!114 &7169286466311545736
 MonoBehaviour:
@@ -165,6 +165,19 @@ MonoBehaviour:
   DataHasBeenSent: 0
   ClearData: 0
   ComponentName: 
+--- !u!65 &7685730236275508665
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149536249851853324}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.021154791, y: 0.02115479, z: 0.03429781}
+  m_Center: {x: -0.000000003259629, y: 4.656614e-10, z: 0.0000000018626451}
 --- !u!1 &493027559046761269
 GameObject:
   m_ObjectHideFlags: 0

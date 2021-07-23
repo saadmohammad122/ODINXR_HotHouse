@@ -44,7 +44,7 @@ public class PlayerMenu : MonoBehaviour
     {
         MainMenu.SetActive(true);
         isPaused = true;
-        GameObject.Find("FirstPerson-AIO").GetComponent<FirstPersonAIO>().playerCanMove = false;
+        GameObject.Find("Student").GetComponent<FirstPersonAIO>().playerCanMove = false;
 
         setMenu();
     }
@@ -53,7 +53,7 @@ public class PlayerMenu : MonoBehaviour
     {
         MainMenu.SetActive(false);
         isPaused = false;
-        GameObject.Find("FirstPerson-AIO").GetComponent<FirstPersonAIO>().playerCanMove = true;
+        GameObject.Find("Student").GetComponent<FirstPersonAIO>().playerCanMove = true;
 
     }
 

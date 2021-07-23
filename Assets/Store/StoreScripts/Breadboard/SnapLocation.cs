@@ -5,16 +5,6 @@ using UnityEngine;
 public class SnapLocation : MonoBehaviour
     {
 
-        void Start()
-        {
-
-        }
-
-        void Update()
-        {
-
-        }
-
         private void OnTriggerStay(Collider other)
         {
             if (other.gameObject.tag == "Resistor")
@@ -25,7 +15,6 @@ public class SnapLocation : MonoBehaviour
                 component.highX = this.GetComponent<Collider>().bounds.max.x;
                 component.lowZ = this.GetComponent<Collider>().bounds.min.z;
                 component.highZ = this.GetComponent<Collider>().bounds.max.z;
-                component.lowY = this.GetComponent<Collider>().bounds.min.y;
             }
         }
 

@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7277344490754811459
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5963710700453021323}
+  - component: {fileID: 5096402800466610370}
+  - component: {fileID: 3584197264814402430}
+  - component: {fileID: 1374866249406371417}
+  m_Layer: 0
+  m_Name: Demo_Slides2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5963710700453021323
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7277344490754811459}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.013266896, y: 0.013266896, z: 0.013266896}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.01, y: 0.422}
+  m_SizeDelta: {x: 147.5, y: 59.4}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5096402800466610370
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7277344490754811459}
+  m_CullTransparentMesh: 1
+--- !u!114 &3584197264814402430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7277344490754811459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1374866249406371417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7277344490754811459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8a8b2ab70674bc1a3cc792e080d8f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PowerPoint:
+  - {fileID: 21300000, guid: 3a69b449b188a4c1ca9016c6ce32094a, type: 3}
+  - {fileID: 21300000, guid: 8fa55ac94c47a49bfaefde8f75bf719e, type: 3}
+  - {fileID: 21300000, guid: a30d71c4fdce3476da7472e723632a05, type: 3}
+  - {fileID: 21300000, guid: 82e0fddd7d3514d5eb12591ab2682768, type: 3}
+  - {fileID: 21300000, guid: 934d87f56f84b4d2bbada6083871906e, type: 3}
+  - {fileID: 21300000, guid: 538ddde10ebc14a788591c8f7203dd63, type: 3}
+  - {fileID: 21300000, guid: 2465b29b734fa457dbf9ff7586291d9b, type: 3}
+  - {fileID: 21300000, guid: 0c16367f5f7b041e08be349c68937348, type: 3}
+  - {fileID: 21300000, guid: 0bff9dcd5472047d7bcb09996c9d0bb1, type: 3}
+  - {fileID: 21300000, guid: 0bcc7ee9315c441ad9add0a4da36794a, type: 3}
+  - {fileID: 21300000, guid: 6f9ac2f982d7242018e6a804b82fd5c5, type: 3}
+  - {fileID: 21300000, guid: 2309696b796f343bda55b0947c6a8857, type: 3}
+  - {fileID: 21300000, guid: 5784c82a91b6b40cea9ca5f2231edf81, type: 3}
+  - {fileID: 21300000, guid: 8d8c87c94ce0846948f1a0fb7e2ca538, type: 3}
+  - {fileID: 21300000, guid: bf88a59f2164c4c7aa9187275a51315d, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
