@@ -9,7 +9,7 @@ public class ObjectController : MonoBehaviour
     public bool isHeld;
     public bool hovering;
     public Vector3 offset;
-    private readonly float size = 0.03f;
+    private float size = 0.03f;
 
     // For calculating the bounds of the placement of the object
     // Set in SnapLocation.cs
