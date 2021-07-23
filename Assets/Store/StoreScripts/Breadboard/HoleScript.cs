@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class HoleScript : MonoBehaviour {
         public string UniqueName;
-        Collider ColliderBox;
-        ///public string Colliderbox
+        public Collider ColliderBox;
+        
+        
+
         // Start is called before the first frame update
         void Start()
         {
-            UniqueName = this.name + transform.parent.name + transform.parent.parent.name + transform.parent.parent.parent.name;
+            UniqueName = this.name + transform.parent.parent.name;
 
 
-            ColliderBox = GetComponent<BoxCollider>();
-            ColliderBox.isTrigger = false;
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            //ColliderBox = GetComponent<BoxCollider>();
+            //ColliderBox.isTrigger = false;
+            
         }
 }

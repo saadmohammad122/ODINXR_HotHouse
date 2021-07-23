@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
     {
         objectSize = component.GetComponent<Renderer>().bounds.size.magnitude;
         component.isHeld = true;
+        DeactivateObject(component);
 
         // To ensure that the component rotates w/ the player, make the player
         //  its parent so player rotation will affect component rotation
@@ -109,6 +110,7 @@ public class PlayerController : MonoBehaviour
         component.GetComponent<Rigidbody>().useGravity = true;
         component.GetComponent<Rigidbody>().isKinematic = false;
         component.isHeld = false;
+        ActivateOdject(component);
         //component.transform.parent = null;
 
         return null;
@@ -120,5 +122,15 @@ public class PlayerController : MonoBehaviour
         var angle = component.transform.eulerAngles;
         angle.y = rotationAngle;
         component.transform.eulerAngles = angle;
+    }
+
+    public void DeactivateObject(ObjectController component)
+    {
+        component.GetComponent<CollisionDetecion>().enabled = false;
+    }
+
+    public void ActivateOdject(ObjectController component)
+    {
+        component.GetComponent<CollisionDetecion>().enabled = true;
     }
 }

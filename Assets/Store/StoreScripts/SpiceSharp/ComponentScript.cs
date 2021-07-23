@@ -1,4 +1,4 @@
-using System.Collections;
+  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -18,10 +18,6 @@ public class ComponentScript : MonoBehaviour
         // public List<KeyValuePair<string, string>> NodeList;
         public Dictionary<string, string> NodeList = new Dictionary<string, string>();
 
-        private void Awake()
-        {
-
-        }
 
         // Start is called before the first frame update
         void Start()
@@ -29,6 +25,8 @@ public class ComponentScript : MonoBehaviour
             System.Random numberGenerator = new System.Random();
 
             component = this.gameObject;
+
+            //if function for repeats may need to be considered
             ComponentName = this.name + numberGenerator.Next(1, 100000).ToString();
 
         }
@@ -40,11 +38,6 @@ public class ComponentScript : MonoBehaviour
             while (FrameCount > 50)
             {
                 FrameCount = 0;
-                //  Call Function to add to NodeList
-                //  Consider running this function via ontriggerenter, which triggers the function to populate NodeList
-                //  Benefits    :   Low processing use
-                //  Drawbacks   :   More overhead on collisions, must implement a snap in place to have the trigger work.
-                //                      On trigger, if the right trigger, then populate NodeList
                 var CircuitScript = this.GetComponentInParent<CircuitCreator>();
                 if (ClearData)
                 {
@@ -100,6 +93,7 @@ public class ComponentScript : MonoBehaviour
 
         }
 
+        //What is the purpose of this?
         private SpiceSharp.Components.Component CreateResistor(int ComponentValue)
         {
             Resistor NewResistor = new Resistor(ComponentName, NodeList["In"], NodeList["Out"], ComponentValue);

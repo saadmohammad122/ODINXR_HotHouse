@@ -8,6 +8,7 @@ TagManager:
   - In
   - BreadBoardHoles
   - Resistor
+  - hole
   layers:
   - Default
   - TransparentFX

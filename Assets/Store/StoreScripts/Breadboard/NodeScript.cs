@@ -16,8 +16,9 @@ public class NodeScript : MonoBehaviour
         private void OnCollisionEnter(Collision collision)
         {
         
-            if (this.GetComponent<HoleScript>() != null)
+            if (this.name == "Colliders")
             {
+      
                 var componentScript = this.GetComponentInParent<ComponentScript>();
                 string nodeLocation = this.GetComponent<HoleScript>().UniqueName;
                 print("Enter_name:  " + name);
@@ -27,7 +28,7 @@ public class NodeScript : MonoBehaviour
                 GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
                 componentScript.NodeList.Add(name, nodeLocation);
 
-            if (!componentScript.NodeList.ContainsKey(name))
+                if (!componentScript.NodeList.ContainsKey(name))
                 {
                     print("Got to on collision enter.");
                     componentScript.NodeList.Add(name, nodeLocation);
@@ -35,6 +36,8 @@ public class NodeScript : MonoBehaviour
                 }
                 //Check if doubles on this if statement otherwise delete
             }
+
+ 
         }
        
 
@@ -83,7 +86,7 @@ public class NodeScript : MonoBehaviour
 
 
 
-       
+       //OnCollisionExit
 
         private void OnTriggerExit(Collider other)
         {
@@ -110,7 +113,9 @@ public class NodeScript : MonoBehaviour
         // Update is called once per frame
         void Update()
         {
-            /*if (FreeFall == false)
+            
+
+        /*if (FreeFall == false)
             {
                 var componentScript = this.GetComponentInParent<ComponentScript>();
                 Rigidbody physicalBody = componentScript.component.GetComponent<Rigidbody>();
