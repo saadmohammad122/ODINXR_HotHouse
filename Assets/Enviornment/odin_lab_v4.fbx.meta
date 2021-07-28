@@ -1,0 +1,357 @@
+fileFormatVersion: 2
+guid: 51faa85702559ad429226379245b471c
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Baseboard_material
+    second: {fileID: 2100000, guid: 4a97c2dec0861244a9726fe7988b22e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bread Text Color
+    second: {fileID: 2100000, guid: 0d9faecdaedf72245aeb8495535bcaab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Breadboard Material
+    second: {fileID: 2100000, guid: d06108fa7b5637844ae1cb1b8d7cf06b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cabinet Material
+    second: {fileID: 2100000, guid: 5882e7d862b7023489fa0c85c256ae06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Clock body
+    second: {fileID: 2100000, guid: 08e4065b2cb1bc0429fcbddf2a156552, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Countertop Material
+    second: {fileID: 2100000, guid: af4e72bbfa3a73c4f98252c50c3e07d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door Material
+    second: {fileID: 2100000, guid: 68d5191e3e4641e4f935a957e01f3964, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DoorGlass Material
+    second: {fileID: 2100000, guid: 20d6c944fd2190a4682c899c8038af03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Drawer Material
+    second: {fileID: 2100000, guid: 833af978d1de61a44949287561b34064, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Floor Material
+    second: {fileID: 2100000, guid: 493a7937cbc754a4db5ef3f2788650a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Multimeter
+    second: {fileID: 2100000, guid: 416851a0a0a22604aaa26cff143e6e5f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Negative Material
+    second: {fileID: 2100000, guid: 4164189db462b90468a4c094093631a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: ce34c78b675f1ee438c27fdc1a9aae13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plant_Leaf
+    second: {fileID: 2100000, guid: a9f017a43df521440877094561cff420, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plant_Pot
+    second: {fileID: 2100000, guid: 8d5caafafa53799468d4c66785a04729, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plant_Soil
+    second: {fileID: 2100000, guid: 3f55fb338c8064347a170b13d8e07103, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plant_Stem
+    second: {fileID: 2100000, guid: 8d7b7fa32a2eb684f9d2e96d1e58a575, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plastic
+    second: {fileID: 2100000, guid: 42e482f0496f026468870d89e1f82a38, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Positive Material
+    second: {fileID: 2100000, guid: c3d220bcbc7a9f84a8f02c80fa17cce6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pot
+    second: {fileID: 2100000, guid: b9a56f53d8bd3c440aeb1d4c93fec5f5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Raised Floor Material
+    second: {fileID: 2100000, guid: 1da4de125870f5a41b0c7042ff3e4e2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sandblasted silver metal
+    second: {fileID: 2100000, guid: 0355a741889a05342931d82ae2a4fe78, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Screen
+    second: {fileID: 2100000, guid: 4f681a7ed66c4d44db2c93d7f0f8e14b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Screen Material
+    second: {fileID: 2100000, guid: aa1aac8413b4eff449cd670d2f9d7720, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shelf Material
+    second: {fileID: 2100000, guid: b3ca79de209e2a7408b1003c10afdd6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StandSG
+    second: {fileID: 2100000, guid: b6c1397a906c1d1419a40816b390b4e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Trim
+    second: {fileID: 2100000, guid: 1a2b3d9de11f1354f9e7bad649982b78, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall Material
+    second: {fileID: 2100000, guid: 654c9fa99de5f61458025da0916315b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: button array
+    second: {fileID: 2100000, guid: 881d6ecf125a5ae488958c83bdc3c606, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: button housing
+    second: {fileID: 2100000, guid: 505ec5c1ba1860c449747c3ceb4a9916, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: button material
+    second: {fileID: 2100000, guid: 6fb74d14f3e14ea4ba1442cb68be642d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: clock chrome
+    second: {fileID: 2100000, guid: a8272e97d66654a499fc9cdb96372da0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: clock dial
+    second: {fileID: 2100000, guid: be3b1d59473f89d469c65080ec7f9f42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: clock glass
+    second: {fileID: 2100000, guid: 5a7cbb92a98c1244a8a3de652647f660, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decal
+    second: {fileID: 2100000, guid: 280855e9a1546db4796cabc84b23ef80, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ground
+    second: {fileID: 2100000, guid: 94fc8488ea038ac489672c4bd9eed3e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: handle
+    second: {fileID: 2100000, guid: 46a7781f9f360204f8d10026434ed036, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: leaves
+    second: {fileID: 2100000, guid: 07b648b7477f7c94fb07339a20f52f63, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mia_material_x1SG
+    second: {fileID: 2100000, guid: f236ec41c9ac7994db0f78f226db4bc0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong1SG
+    second: {fileID: 2100000, guid: cd34d9d5e45e26842bcabe71375e8f22, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong2SG
+    second: {fileID: 2100000, guid: a4bf2d08889b45a4c906157c4e761d20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong3SG
+    second: {fileID: 2100000, guid: 709dcc4f783fa5e4fb606b2d098dbfc5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: plug
+    second: {fileID: 2100000, guid: e8435139fd4da2748aa5ae39cd632ccc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: root
+    second: {fileID: 2100000, guid: a44471e86079c7a498ef0ae14108f6ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: screen
+    second: {fileID: 2100000, guid: 7191d2ee845b8954b885b65e0c36eaaa, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Pot_COLOR
+    second: {fileID: 2800000, guid: ce835ef76bb57494db1ada89fd16f03d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Pot_NRM
+    second: {fileID: 2800000, guid: 6d668afc433ed0c4f9e75fed6d13934c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Pot_SPEC
+    second: {fileID: 2800000, guid: 386bff38bfaa1b44782f95733ca0941d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: grey and brown soil_albedo
+    second: {fileID: 2800000, guid: cf3d6965ca33c714f853e074b98c748e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: grey and brown soil_normal
+    second: {fileID: 2800000, guid: eb2e2232bf042be43b93e81f1de3e321, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: grey and brown soil_roughness
+    second: {fileID: 2800000, guid: 71d9c6da139761344aced3a471bacd60, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: prop_clock_alarm_ikea_dekad_dial_dmap
+    second: {fileID: 2800000, guid: 7d5ad1af70ca88a44bea326df30dde18, type: 3}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
