@@ -1,4 +1,4 @@
-  using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -8,30 +8,24 @@ using SpiceSharp;
 
 public class ComponentScript : MonoBehaviour
     {
-        public int numOfInputs = 2;
         private int FrameCount = 0;
         public GameObject component;
         public bool DataHasBeenSent = false;
         public bool ClearData = false;
-        public string ComponentName;        // The unique name for each Component in the game 
-
-        // public List<KeyValuePair<string, string>> NodeList;
+        public string ComponentName;
+        public int ComponentValue;
         public Dictionary<string, string> NodeList = new Dictionary<string, string>();
-
 
         // Start is called before the first frame update
         void Start()
         {
-            System.Random numberGenerator = new System.Random();
-
-            component = this.gameObject;
-
-            //if function for repeats may need to be considered
-            ComponentName = this.name + numberGenerator.Next(1, 100000).ToString();
-
+            ComponentName = this.GetComponent<Properties>().UniqueName;
+            ComponentValue = this.GetComponent<Properties>().Value;
+            var CircuitScript = this.GetComponentInParent<CircuitCreator>();
+            CircuitScript.numOfComponents += 1;
         }
-
-
+        
+        
         // Update is called once per frame
         void Update()
         {
@@ -41,26 +35,21 @@ public class ComponentScript : MonoBehaviour
                 var CircuitScript = this.GetComponentInParent<CircuitCreator>();
                 if (ClearData)
                 {
-                    CircuitScript.ListOfComponents.Remove(this.name);
+                //removed component
+                    RemoveComponent(ComponentName);
                     NodeList.Clear();
                     ClearData = false;
                 }
 
-                else if ((NodeList.Count == (numOfInputs)) & !DataHasBeenSent)    // Every input has been accounted for in the NodeList
-                {
+                else if ((NodeList.Count == (this.GetComponent<Properties>().numberOfInput)) & !DataHasBeenSent)    // Every input has been accounted for in the NodeList
+            {
                     SendDataToCircuitCreator();
-
                     //CircuitScript.ListOfComponents.Add(ComponentName, NodeList);
                     //CircuitScript.numOfComponents += 1;
                     DataHasBeenSent = true;
 
 
                 }
-                /*foreach (var p in NodeList)
-                {
-                    print(p);
-                }*/
-
             }
             FrameCount++;
         }
@@ -72,35 +61,38 @@ public class ComponentScript : MonoBehaviour
             var Attributes = this.GetComponentInParent<Properties>();
             string ComponentType = Attributes.Type;
             int ComponentValue = Attributes.Value;
-            SpiceSharp.Components.Component newComponent;
 
             switch (ComponentType)
             {
                 case "Resistor":
-                    newComponent = CreateResistor(ComponentValue);
+                    CreateResistor(ComponentValue);
                     break;
                 // Include other case's for what is considered a component Type;
                 default:
-                    newComponent = null;
+                    
                     break;
 
             }
 
-            var CircuitScript = this.GetComponentInParent<CircuitCreator>();
-            CircuitScript.ListOfComponents.Add(ComponentName, newComponent);
-            CircuitScript.numOfComponents += 1;
             return;
 
         }
 
-        //What is the purpose of this?
-        private SpiceSharp.Components.Component CreateResistor(int ComponentValue)
-        {
-            Resistor NewResistor = new Resistor(ComponentName, NodeList["In"], NodeList["Out"], ComponentValue);
-            return NewResistor;
+    private void CreateResistor(int ComponentValue)
+    {
+            print(NodeList["In"] + NodeList["Out"]);
+            Resistor NewResistor = new Resistor(ComponentName, "in", "out", ComponentValue); //NodeList["In"], NodeList["Out"]
+        var CircuitScript = this.GetComponentInParent<CircuitCreator>();
+            CircuitScript.mainCircuit.Add(NewResistor);
+            
         }
 
-
+        private void RemoveComponent(string ComponentName)
+        {
+            var CircuitScript = this.GetComponentInParent<CircuitCreator>();
+            CircuitScript.mainCircuit.Remove(ComponentName);
+            
+    }
     }
 
 

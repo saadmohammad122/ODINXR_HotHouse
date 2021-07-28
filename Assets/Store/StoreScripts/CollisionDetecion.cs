@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class CollisionDetecion : MonoBehaviour
 {
+
+    private int exitCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -12,18 +17,31 @@ public class CollisionDetecion : MonoBehaviour
 
      private void OnCollisionEnter(Collision collision)
     {
-        //this.GetComponent<Rigidbody>().isKinematic = true;
-        //this.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        //this.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        //this.GetComponent<Rigidbody>().useGravity = false;
-
         if (this.GetComponent<CollisionDetecion>().enabled == true)
         {
             if (collision.gameObject.CompareTag("BreadBoardHoles"))
             {
-                Debug.Log("Detected?");
+                this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, .855f, this.gameObject.transform.position.z);
+                this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 string nodeLocation = collision.collider.gameObject.GetComponent<HoleScript>().UniqueName;
-                print("nodeLocation:  " + nodeLocation);
+                ContactPoint contact = collision.contacts[0]; 
+                print( contact.thisCollider.name + " hit " + nodeLocation);
+                exitCount = 0;
+            }
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (exitCount < 2)
+        {
+
+            if (other.gameObject.CompareTag("BreadBoardHoles"))
+            {
+
+                string nodeLocation = other.collider.gameObject.GetComponent<HoleScript>().UniqueName;
+                print(this.gameObject.name + " exiting " + nodeLocation);
+                exitCount++;
             }
         }
     }
@@ -31,5 +49,7 @@ public class CollisionDetecion : MonoBehaviour
         void Update()
         {
             
-        }   
+        }
+
+
 }

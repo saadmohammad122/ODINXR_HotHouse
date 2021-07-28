@@ -122,11 +122,11 @@ public class PlayerController : MonoBehaviour
 
     public void DeactivateObject(ObjectController component)
     {
-        component.GetComponent<CollisionDetecion>().enabled = false;
+        component.GetComponent<NodeScript>().enabled = false;
     }
 
     public void ActivateOdject(ObjectController component)
     {
-        component.GetComponent<CollisionDetecion>().enabled = true;
+        component.GetComponent<NodeScript>().enabled = true;
     }
 }
