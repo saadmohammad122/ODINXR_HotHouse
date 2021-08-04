@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7837263526697944626}
   - component: {fileID: 7837263526697944627}
+  - component: {fileID: 3738161712921470438}
   m_Layer: 0
   m_Name: Right Hand Presence
   m_TagString: Untagged
@@ -57,3 +58,16 @@ MonoBehaviour:
   showController: 0
   handModelPrefab: {fileID: 5686134208185362930, guid: 1fd3a7c43c8190f4d8c167ebde694364,
     type: 3}
+--- !u!114 &3738161712921470438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7837263526697944628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0de5c241557ae345b0bbbe87c7129cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerCharacteristics: 576
