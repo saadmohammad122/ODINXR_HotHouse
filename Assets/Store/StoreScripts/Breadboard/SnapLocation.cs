@@ -3,31 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SnapLocation : MonoBehaviour
+{
+
+    private void OnTriggerStay(Collider other)
     {
-
-        private void OnTriggerStay(Collider other)
+        if (other.gameObject.tag == "Resistor")
         {
-            if (other.gameObject.tag == "Resistor")
-            {
-                ObjectController component = other.gameObject.GetComponent<ObjectController>();
-                component.inGrid = true;
-                component.lowX = this.GetComponent<Collider>().bounds.min.x;
-                component.highX = this.GetComponent<Collider>().bounds.max.x;
-                component.lowZ = this.GetComponent<Collider>().bounds.min.z;
-                component.highZ = this.GetComponent<Collider>().bounds.max.z;
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.gameObject.tag == "Resistor")
-            {
-                ObjectController component = other.gameObject.GetComponent<ObjectController>();
-                component.inGrid = false;
-                component.lowX = 0;
-                component.highX = 0;
-                component.lowZ = 0;
-                component.highZ = 0;
-            }
+            ObjectController component = other.gameObject.GetComponent<ObjectController>();
+            component.SetInGrid();
+            component.SetBoundaries(this.GetComponent<Collider>().bounds.min.x,
+                                    this.GetComponent<Collider>().bounds.max.x,
+                                    this.GetComponent<Collider>().bounds.min.z,
+                                    this.GetComponent<Collider>().bounds.max.z);
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Resistor")
+        {
+            ObjectController component = other.gameObject.GetComponent<ObjectController>();
+            component.ClearInGrid();
+            component.ClearBoundaries();
+        }
+    }
+}

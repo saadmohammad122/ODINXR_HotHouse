@@ -7,13 +7,14 @@ public class PlayerController : MonoBehaviour
     private ObjectController component;
     public Camera FPCam;
     public Transform hand;
-    public GameObject rightHand;
 
     private float objectSize;
-    int rotationAngle;
     public RaycastHit hit;
 
     public PlayerMenu menu;
+
+    private readonly int maxDistance = 100;
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,48 +33,36 @@ public class PlayerController : MonoBehaviour
         }
 
         // Assigning the "Q" button on a keyboard to rotate components
-        if (Input.GetKeyDown(KeyCode.Q) && component != null)
+        if (Input.GetKeyDown(KeyCode.R) && component != null)
         {
-            Rotate();
+            component.Rotate();
         }
     }
 
     private void GrabObject()
     {
-        /* ISSUE: The player is unable to grab resistors within the grid
-         *        because the raycast stops as the box collider.
-         *        
-         * SOLUTION: The use of layers. We have created a custom layer for
-         *           the circuit grid under layer 6.  If we set the layer
-         *           mask to represent layer 6 and then invert it to work
-         *           for everything but layer 6, we can "look through it" */
+
+        Ray mousePointer = FPCam.ScreenPointToRay(Input.mousePosition);
 
         int layerMask = 1 << 6;
         layerMask = ~layerMask;
-
-        Ray mousePointer = FPCam.ScreenPointToRay(Input.mousePosition);
-        int maxDistance = 100;
 
         if (component == null)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                // Old way of using the raycast
-                //if (Physics.Raycast(mousePointer, out hit))
-
-                // New way of using raycast
-                // We are also setting the maxDistance the raycast will go, which is nice
                 if (Physics.Raycast(mousePointer, out hit, maxDistance, layerMask))
                 {
+                    // Check to see if hit component
                     if (hit.transform.gameObject.GetComponent<ObjectController>() != null)
                     {
                         component = hit.transform.gameObject.GetComponent<ObjectController>();
                         HitComponent(component);
                     }
-                    else if (menu.isPaused)
+
+                    // Check to see if clicked button
+                    else
                     {
-                        // If we don't hit a component, we should check if we
-                        //  hit a button while paused
                         MenuController mc = gameObject.GetComponent<MenuController>();
                         mc.checkButton(hit);
                     }
@@ -82,6 +71,11 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            // Check if rotated and get proper angle for orientation in hand
+            int rotationAngle = 0;
+            if (component.GetRotation())
+                rotationAngle = 90;
+
             component.transform.position = hand.transform.position + FPCam.transform.forward * objectSize;
             var placementAngle = transform.eulerAngles;
             placementAngle.x = 0f;
@@ -94,7 +88,7 @@ public class PlayerController : MonoBehaviour
     private void HitComponent(ObjectController component)
     {
         objectSize = component.GetComponent<Renderer>().bounds.size.magnitude;
-        component.isHeld = true;
+        component.SetIsHeld();
         DeactivateObject(component);
 
         // Turn these off so that the component does not move once in the players hand
@@ -106,28 +100,19 @@ public class PlayerController : MonoBehaviour
     {
         component.GetComponent<Rigidbody>().useGravity = true;
         component.GetComponent<Rigidbody>().isKinematic = false;
-        component.isHeld = false;
+        component.ClearIsHeld();
         ActivateOdject(component);
-        //component.transform.parent = null;
 
         return null;
     }
 
-    public void Rotate()
-    {
-        rotationAngle = (rotationAngle + 90) % 180;
-        var angle = component.transform.eulerAngles;
-        angle.y = rotationAngle;
-        component.transform.eulerAngles = angle;
-    }
-
     public void DeactivateObject(ObjectController component)
     {
-        component.GetComponent<NodeScript>().enabled = false;
+        component.GetComponent<CollisionDetecion>().enabled = false;
     }
 
     public void ActivateOdject(ObjectController component)
     {
-        component.GetComponent<NodeScript>().enabled = true;
+        component.GetComponent<CollisionDetecion>().enabled = true;
     }
 }
