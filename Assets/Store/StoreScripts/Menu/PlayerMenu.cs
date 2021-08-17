@@ -4,57 +4,88 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerMenu : MonoBehaviour
-    {
+{
     public GameObject MainMenu;
-    public GameObject Movement;
     public Camera player;
+    private Transform ComponentContainer;
+    private WristMenu WristMenuScript;
 
-    public bool isPaused = false;
+    public GameObject LeftHand;
+    private float rotationMin = 25;
+    private float rotationMax = 170;
+
+    public GameObject Resistor;
+    private GameObject Component;
+
+    public bool isPaused;
+    public bool buttonPressed;
+    private bool hasComponentInStore;
 
     void Start()
     {
-        /* "SetActive()" enables or disables the component in the hierarchy
-         *  This makes the whole component void in the gamespace
-         *  To see the equivalent of this, go into the hierarchy, select
-         *   something, and click the checkbox right next to it's name on
-         *   the inspector panel */
         MainMenu.SetActive(false);
         isPaused = false;
+        buttonPressed = false;
+        hasComponentInStore = false;
+
+        ComponentContainer = transform.Find("WristMenu").Find("ComponentContainer");
+        if (ComponentContainer == null)
+            Debug.Log("Could not find the ComponentContainer");
+
+        WristMenuScript = transform.Find("WristMenu").GetComponent<WristMenu>();
+        if (WristMenuScript == null)
+            Debug.Log("Could not find WristMenu or the script within WristMenu");
     }
 
     void Update()
     {
-        // The "P" key is used to pull up or put away the menu
-        // I originally wanted escape, but there were conflicts
-        // between that and how Unity normally operates
-        if (Input.GetKeyDown(KeyCode.P))
+
+        if (buttonPressed && isPaused == false)
         {
-            if (isPaused == false)
-            {
-                Pause();
-            }
-            else
-            {
-                Unpause();
-            }
+            Pause();
         }
+        else if (!buttonPressed && isPaused == true)
+        {
+            Unpause();
+        }
+
+        if (isPaused == true)
+            SetMenuPosition();
+
     }
+
+    private void SetMenuPosition()
+    {
+        transform.position = LeftHand.transform.position + LeftHand.transform.forward;
+
+        transform.rotation = LeftHand.transform.localRotation;
+    }
+
+    // Checks the rotation of the left hand, returns true if it is flipped over
+    /*    private bool CheckPaused()
+        {
+            float handRotation = LeftHand.transform.localEulerAngles.z;
+            if (handRotation > rotationMin && handRotation < rotationMax)
+                return true;
+
+            return false;
+        }*/
 
     public void Pause()
     {
         MainMenu.SetActive(true);
         isPaused = true;
-        GameObject.Find("FirstPerson-AIO").GetComponent<FirstPersonAIO>().playerCanMove = false;
 
-        setMenu();
+        if (hasComponentInStore == false)
+        {
+            SpawnComponent();
+        }
     }
 
     public void Unpause()
     {
         MainMenu.SetActive(false);
         isPaused = false;
-        GameObject.Find("FirstPerson-AIO").GetComponent<FirstPersonAIO>().playerCanMove = true;
-
     }
 
     public void Quit()
@@ -62,15 +93,22 @@ public class PlayerMenu : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    private void setMenu()
+    public void SpawnComponent()
     {
-        Vector3 position = player.transform.position + player.transform.forward;
-        position.y = 1.45f;
-        transform.position = position;
+        if (WristMenuScript == null)
+            WristMenuScript = transform.Find("WristMenu").GetComponent<WristMenu>();
 
-        Quaternion rotation = player.transform.rotation;
-        rotation.x = 0;
-        rotation.z = 0;
-        transform.rotation = rotation;
+        Component = WristMenuScript.DisplayComponent(ComponentContainer);
+        hasComponentInStore = true;
+    }
+
+    public void SetComponentInStore()
+    {
+        hasComponentInStore = true;
+    }
+
+    public void TakeComponentFromStore()
+    {
+        hasComponentInStore = false;
     }
 }

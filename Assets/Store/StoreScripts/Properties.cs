@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class Properties : MonoBehaviour
 {
-
-    
     public int Value;
     public int RandomInt;
     public string Type;

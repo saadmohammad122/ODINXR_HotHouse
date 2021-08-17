@@ -16,7 +16,7 @@ public class NodeScript : MonoBehaviour
     {
         if (other.name != "RightNodes")
         {
-            print("this Collider: " + this.name);
+            // print("this Collider: " + this.name);
 
            // print("other Collider: " + other.gameObject.GetComponent<HoleScript>().UniqueName);
         }

@@ -9,6 +9,8 @@ TagManager:
   - Out
   - In
   - BreadBoardHoles
+  - Highlightable
+  - Menu
   layers:
   - Default
   - TransparentFX

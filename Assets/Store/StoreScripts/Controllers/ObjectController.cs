@@ -6,6 +6,7 @@ public class ObjectController : MonoBehaviour
 {
 
     private bool inGrid, isHeld, hovering, rotated;
+    private bool inStore;
     [SerializeField] private Vector3 HorizontalOffset;
     [SerializeField] private Vector3 VerticalOffset;
     [SerializeField] private Vector3 offset;
@@ -14,7 +15,7 @@ public class ObjectController : MonoBehaviour
     // Set in SnapLocation.cs
     private float lowX, highX;
     private float lowZ, highZ;
-    public float lowY;
+    private float lowY;
     private float avgCellSize;
     [SerializeField] private float xBorder;
 
@@ -82,8 +83,6 @@ public class ObjectController : MonoBehaviour
             transform.GetComponent<Rigidbody>().useGravity = true;
             transform.GetComponent<Rigidbody>().isKinematic = true;
 
-            Debug.Log($"Low X: {lowX}; High X: {highX}");
-            Debug.Log("Avg Cell Size: " + avgCellSize);
             Calculator.MiddleLocation(transform.position, lowX, lowZ, avgCellSize, rotated);
         }
         else if (!hovering)
@@ -141,16 +140,33 @@ public class ObjectController : MonoBehaviour
     public void ClearIsHeld()
     {
         isHeld = false;
+        transform.GetComponent<Rigidbody>().useGravity = true;
     }
 
-    public void SetBoundaries(float lowX, float highX, float lowZ, float highZ)
+    public bool CheckInStore()
+    {
+        return inStore;
+    }
+
+    public void SetStoreValue()
+    {
+        inStore = true;
+    }
+
+    public void ClearStoreValue()
+    {
+        inStore = false;
+    }
+
+    public void SetBoundaries(float lowX, float highX, float lowZ, float highZ, float lowY)
     {
         this.lowX = lowX;
         this.highX = highX;
         this.lowZ = lowZ;
         this.highZ = highZ;
+        this.lowY = lowY;
 
-        avgCellSize = (highX - lowX) / 60;
+        avgCellSize = (highZ - lowZ) / 60;
     }
 
     public void ClearBoundaries()
@@ -159,6 +175,7 @@ public class ObjectController : MonoBehaviour
         highX = 0;
         lowZ = 0;
         highZ = 0;
+        lowY = 0;
 
         avgCellSize = 0;
     }
@@ -182,5 +199,6 @@ public class ObjectController : MonoBehaviour
     {
         return rotated;
     }
+
 }
 
