@@ -5,6 +5,7 @@ using SpiceSharp.Components;
 using SpiceSharp.Simulations;
 using SpiceSharp;
 using UnityEngine.UI;
+using SpiceSharp.Validation;
 
 
 public class CircuitCreator : MonoBehaviour
@@ -19,13 +20,17 @@ public class CircuitCreator : MonoBehaviour
         public Camera fpsCam;
         public GameObject SweepButton;
         public Text test;
+        public Circuit testCircuit;
 
     // Start is called before the first frame update
     void Start()
         {
 
-            mainCircuit = new Circuit(new VoltageSource("V1", "in", "0", 1.0));
-        
+            mainCircuit = new Circuit(new VoltageSource("V1", "In", "0", 1.0), (new Resistor("R1", "Out", "0", 0)));
+
+            testCircuit = new Circuit(new VoltageSource("V1", "Row1", "0", 12.0), (new Resistor("Resistor046", "Row1", "Row4", 10000000)), (new Resistor("Ground", "Row4", "0", 0)));
+
+
         }
 
     // Update is called once per frame
@@ -48,25 +53,25 @@ public class CircuitCreator : MonoBehaviour
                     if (hit.collider.name == SweepButton.name)
                     {
                         // Create a DC simulation that sweeps V1 from -1V to 1V in steps of 100mV
-                        var dc = new DC("DC1", "V1", -1.0, 1.0, 0.2);
+                        var dc = new DC("DC1", "V1", -12.0, 12.0, 0.5);
 
                         // Catch exported data
                         dc.ExportSimulationData += (sender, args) =>
                         {
-                            var input = args.GetVoltage("In");
-                            var output = args.GetVoltage("Out");
-                            print(output);
+                            var input = args.GetVoltage("Row1"); 
+                            var output = args.GetVoltage("Row4");
+                            print(input - output);
                         };
                         
-                        dc.Run(mainCircuit);
+                        dc.Run(testCircuit);
                     }
                     new WaitForSecondsRealtime(10);
                 }
             }
-
+            
         }
 
-
+        //public IEnumerable<IRuleViolation> Violations { get; }
 
         //private void UpdateSpiceSharp()
         //{
