@@ -10,23 +10,33 @@ using SpiceSharp.Validation;
 
 public class CircuitCreator : MonoBehaviour
  {
-        public int numOfComponents = 0;
+        public int numOfComponents = 1;
         private int FrameCount = 0;
-        //public Dictionary<string, Dictionary <string, string> > ListOfComponents = new Dictionary<string, Dictionary<string, string>>();
+    //public Dictionary<string, Dictionary <string, string> > ListOfComponents = new Dictionary<string, Dictionary<string, string>>();
 
-        // Gave ComponentScript the ability to create SpiceSharp Components with the breadboard positioning, and then hand that component to CircuitCreator
-        //public Dictionary<string, SpiceSharp.Components.Component> ListOfComponents = new Dictionary<string, SpiceSharp.Components.Component>();
+    // Gave ComponentScript the ability to create SpiceSharp Components with the breadboard positioning, and then hand that component to CircuitCreator
+    //public Dictionary<string, SpiceSharp.Components.Component> ListOfComponents = new Dictionary<string, SpiceSharp.Components.Component>();
+        
+        public Dictionary<string, Dictionary <string, string> > ListOfComponents = new Dictionary<string, Dictionary<string, string>>();
         public Circuit mainCircuit;
         public Camera fpsCam;
         public GameObject SweepButton;
         public Text test;
         public Circuit testCircuit;
+        public System.Random numberGenerator;
 
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        numberGenerator = new System.Random();
+
+    }
+
     void Start()
         {
 
-            mainCircuit = new Circuit(new VoltageSource("V1", "In", "0", 1.0), (new Resistor("R1", "Out", "0", 0)));
+            mainCircuit = new Circuit(new VoltageSource("V1", "In", "0", 1.0), new Resistor("Wire1", "In", "Row1", 0), new Resistor("Wire2", "Row7", "0", 0));
 
             testCircuit = new Circuit(new VoltageSource("V1", "Row1", "0", 12.0), (new Resistor("Resistor046", "Row1", "Row4", 10000000)), (new Resistor("Ground", "Row4", "0", 0)));
 
@@ -53,17 +63,17 @@ public class CircuitCreator : MonoBehaviour
                     if (hit.collider.name == SweepButton.name)
                     {
                         // Create a DC simulation that sweeps V1 from -1V to 1V in steps of 100mV
-                        var dc = new DC("DC1", "V1", -12.0, 12.0, 0.5);
+                        var dc = new DC("DC1", "V1", 0, 12.0, 2);
 
                         // Catch exported data
                         dc.ExportSimulationData += (sender, args) =>
                         {
                             var input = args.GetVoltage("Row1"); 
                             var output = args.GetVoltage("Row4");
-                            print(input - output);
+                            print("\ninput :  " + input + "\n" + "output: " + output);
                         };
                         
-                        dc.Run(testCircuit);
+                        dc.Run(mainCircuit);
                     }
                     new WaitForSecondsRealtime(10);
                 }

@@ -16,15 +16,38 @@ public class ComponentScript : MonoBehaviour
     public int ComponentValue;
     public Dictionary<string, Dictionary<string, string>> NodeList = new Dictionary<string, Dictionary<string, string>>();
 
+    public bool AddedToDictionary;
+   
+
     // Start is called before the first frame update
     void Start()
     {
-        ComponentName = this.GetComponent<Properties>().UniqueName;
+       // ComponentName = this.GetComponent<Properties>().UniqueName;
         ComponentValue = this.GetComponent<Properties>().Value;
         var CircuitScript = this.GetComponentInParent<CircuitCreator>();
         CircuitScript.numOfComponents += 1;
-
+        AddedToDictionary = false;
     }
+
+
+    /* 
+     *  Important Note for Cole:
+     * 
+     *      I think we can take out the Update function in this file. Right now, the Update functions to check every 50 frames if the 
+     *      current component has a completely filled dictionary. That means that all inputs have been added. Additionally, if 
+     *      onCollisionExit is triggered, this update function checks and deletes the component from the ListOfComponents. 
+     *      
+     *      To make a simpler system, why don't we check if all inputs have been added in the Node Script stage? Every time OncollisionEnter
+     *      is triggered, we can check if our dictionary is "full". If it is, we add it to the spice sharp circuit right there. If it isn't, we wait 
+     *      until the next OnCollsionEnter. Same thing for OnCollisionExit, but when OCExit is triggered we delete the component from the spice sharp
+     *      dictionary. This assumes that no component can be half plugged into the board. 
+     *      
+     */
+
+
+
+
+
 
 
     // Update is called once per frame
@@ -32,28 +55,37 @@ public class ComponentScript : MonoBehaviour
     {
         while (FrameCount > 50)
         {
+            /* We need to write the Component Name here, because Unity calls Component Script first, 
+             * and then properties script. This means that the Unique name is not 
+             * generated in time for Component Script to grab it.    
+            */
+            ComponentName = this.GetComponent<Properties>().UniqueName;
+
             FrameCount = 0;
-            print(DataHasBeenSent);
             var CircuitScript = this.GetComponentInParent<CircuitCreator>();
             string UniqueName = this.gameObject.GetComponent<Properties>().UniqueName;
-            print(NodeList[UniqueName].Count);
             if (ClearData)
             {
-                //removed component
                 RemoveComponent(ComponentName);
-                NodeList.Clear();
                 ClearData = false;
+                DataHasBeenSent = false;
             }
-            else if ((NodeList[UniqueName].Count == (this.GetComponent<Properties>().numberOfInput)) & !DataHasBeenSent)    // Every input has been accounted for in the NodeList
+
+
+            // else if ((NodeList[UniqueName].Count == (this.GetComponent<Properties>().numberOfInput)) & !DataHasBeenSent)    // Every input has been accounted for in the NodeList
+            
+            else if (AddedToDictionary) // AddedToDictionary is a temporary filter to prevent components that 
+                                        // that are not added to the board from triggering the below If statement.
             {
-                print("We're here!");
-                SendDataToCircuitCreator();
-                //CircuitScript.ListOfComponents.Add(ComponentName, NodeList);
-                //CircuitScript.numOfComponents += 1;
-                DataHasBeenSent = true;
 
-
+                if ((CircuitScript.ListOfComponents[UniqueName].Count == this.GetComponent<Properties>().numberOfInput) &
+                        !DataHasBeenSent)
+                {
+                    SendDataToCircuitCreator();
+                    DataHasBeenSent = true;
+                }
             }
+            
         }
         FrameCount++;
     }
@@ -83,22 +115,21 @@ public class ComponentScript : MonoBehaviour
 
     private void CreateResistor(int ComponentValue)
     {
-        string UniqueName = this.gameObject.GetComponent<Properties>().UniqueName;
-        //print("Unique name in component script: " + UniqueName);
-        //print(NodeList["In"] + NodeList["Out"]);
-        print("Creating resistor");
-        print(UniqueName);
-        print(NodeList[UniqueName]["In"]);
-        print(NodeList[UniqueName]["Out"]);
-        Resistor NewResistor = new Resistor(ComponentName, NodeList[UniqueName]["In"], NodeList[UniqueName]["Out"], ComponentValue); //NodeList["In"], NodeList["Out"]
         var CircuitScript = this.GetComponentInParent<CircuitCreator>();
+        string UniqueName = this.gameObject.GetComponent<Properties>().UniqueName;
+        Resistor NewResistor = new Resistor(ComponentName, CircuitScript.ListOfComponents[UniqueName]["In"], 
+        CircuitScript.ListOfComponents[UniqueName]["Out"], ComponentValue); 
         CircuitScript.mainCircuit.Add(NewResistor);
+        CircuitScript.numOfComponents += 1;
     }
 
     private void RemoveComponent(string ComponentName)
     {
         var CircuitScript = this.GetComponentInParent<CircuitCreator>();
         CircuitScript.mainCircuit.Remove(ComponentName);
+        CircuitScript.ListOfComponents.Remove(ComponentName);
+        return;
+
     }
 }
 

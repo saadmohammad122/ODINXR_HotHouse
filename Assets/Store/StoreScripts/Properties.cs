@@ -20,9 +20,12 @@ public class Properties : MonoBehaviour
 
     public void NameGenerator()
     {
-        System.Random numberGenerator = new System.Random();
+        //System.Random numberGenerator = new System.Random();
+        //var CircuitScript = this.GetComponentInParent<CircuitCreator>();
+        //UniqueName = this.name + CircuitScript.numOfComponents + numberGenerator.Next(1, 1000).ToString();
         var CircuitScript = this.GetComponentInParent<CircuitCreator>();
-        UniqueName = this.name + CircuitScript.numOfComponents + numberGenerator.Next(1, 100).ToString();
+
+        UniqueName = this.name  + CircuitScript.numOfComponents.ToString()  + CircuitScript.numberGenerator.Next(1, 10000).ToString();
     }
 
     // Update is called once per frame

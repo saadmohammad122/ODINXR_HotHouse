@@ -12,7 +12,7 @@ public class HoleScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UniqueName = transform.parent.parent.name;
+        UniqueName = transform.parent.name + transform.parent.parent.name;
 
 
         //ColliderBox = GetComponent<BoxCollider>();
