@@ -62,12 +62,16 @@
     <Compile Include="Assets\Store\StoreScripts\Breadboard\NodeScript.cs" />
     <Compile Include="Assets\Store\StoreScripts\Breadboard\SnapLocation.cs" />
     <Compile Include="Assets\Store\StoreScripts\CollisionDetecion.cs" />
+    <Compile Include="Assets\Store\StoreScripts\Controllers\ComponentNameController.cs" />
+    <Compile Include="Assets\Store\StoreScripts\Controllers\DisplayComponentName.cs" />
     <Compile Include="Assets\Store\StoreScripts\Controllers\MenuController.cs" />
     <Compile Include="Assets\Store\StoreScripts\Controllers\ObjectController.cs" />
     <Compile Include="Assets\Store\StoreScripts\Controllers\PlayerController.cs" />
     <Compile Include="Assets\Store\StoreScripts\FirstPersonAIO.cs" />
+    <Compile Include="Assets\Store\StoreScripts\FunctionGenerator\FunctionGenerator.cs" />
     <Compile Include="Assets\Store\StoreScripts\MainMenu\MainMenu.cs" />
     <Compile Include="Assets\Store\StoreScripts\Menu\ComponentAmount.cs" />
+    <Compile Include="Assets\Store\StoreScripts\Menu\ComponentNames.cs" />
     <Compile Include="Assets\Store\StoreScripts\Menu\HandButton.cs" />
     <Compile Include="Assets\Store\StoreScripts\Menu\PlayerMenu.cs" />
     <Compile Include="Assets\Store\StoreScripts\Menu\WristMenu.cs" />
