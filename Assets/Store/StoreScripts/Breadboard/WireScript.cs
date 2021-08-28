@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NodeScript : MonoBehaviour
+public class WireScript : MonoBehaviour
 {
 
     private int exitCount;
@@ -15,27 +15,25 @@ public class NodeScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print(this.name + " got to OnCollisionEnter!");
-        if (this.GetComponent<NodeScript>().enabled == true)
-        {
-            print(this.name + " almost");
+        print("Got here!");
+        
             if (collision.gameObject.CompareTag("BreadBoardHoles"))
             {
-                print(this.name + " adding");
+                print(this.name + " Got to OnCollisionEnter!");
                 //collision.collider.transform.position = new Vector3(this.gameObject.transform.position.x, .855f, this.gameObject.transform.position.z);
-                this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, .88f, this.gameObject.transform.position.z);
+                this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, .8798f, this.gameObject.transform.position.z);
                 //collision.collider.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                this.gameObject.transform.rotation = Quaternion.Euler(0, 90, 90);
+                //this.gameObject.transform.rotation = Quaternion.Euler(0, 90, 90);
                 //this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 string nodeLocation = collision.collider.gameObject.GetComponent<HoleScript>().UniqueName;
                 ContactPoint contact = collision.contacts[0];
-                string UniqueName = this.gameObject.GetComponent<Properties>().UniqueName;
-                print(UniqueName + ":    "  + contact.thisCollider.name + " hit " + nodeLocation);
-                
-                var ComponentScript = this.GetComponent<ComponentScript>();
-                var CircuitCreator = this.GetComponentInParent<CircuitCreator>();
-                
+                string UniqueName = this.GetComponentInParent<Properties>().UniqueName;
+                print(UniqueName + ":    " + contact.thisCollider.name + " hit " + nodeLocation);
+
+               var ComponentScript = this.GetComponentInParent<ComponentScript>();
+               var CircuitCreator = this.GetComponentInParent<CircuitCreator>();
+
 
 
                 // TODO: Case statement for componenets with more than two input/output
@@ -44,39 +42,28 @@ public class NodeScript : MonoBehaviour
                 //if (!ComponentScript.NodeList.ContainsKey(UniqueName))
                 if (!CircuitCreator.ListOfComponents.ContainsKey(UniqueName))
                 {
-                    // Create an entry. We have to do this because we need to create a new dictionary within our dictionary
-                    //ComponentScript.NodeList.Add(UniqueName, new Dictionary<string, string>());
+                    print("Adding itself to circuitCreator!");
+
                     ComponentScript.AddedToDictionary = true;
                     CircuitCreator.ListOfComponents.Add(UniqueName, new Dictionary<string, string>());
-
-                    // Init vars to null
-                    //print(ComponentScript.NodeList[UniqueName].Count);
-                    //ComponentScript.NodeList[UniqueName]["In"] = null;
-                    //ComponentScript.NodeList[UniqueName]["0ut"] = null;
-                    // Set in/out. we don't know what it is and we don't need to
-
-                    //ComponentScript.NodeList[UniqueName][contact.thisCollider.name] = nodeLocation;
                     CircuitCreator.ListOfComponents[UniqueName][contact.thisCollider.name] = nodeLocation;
-                    //print(ComponentScript.NodeList[UniqueName][contact.thisCollider.name]);
-                    //print(ComponentScript.NodeList[UniqueName].Count);
-                    // If the component is already in the dictionary
                 }
                 else
-                {                    // Just add in/out
-                                     //print(contact.thisCollider.name);
+                {
 
-                    //ComponentScript.NodeList[UniqueName][contact.thisCollider.name] = nodeLocation;
+                //ComponentScript.NodeList[UniqueName][contact.thisCollider.name] = nodeLocation;
+                print("Now we are adding ourselves to the list of components ");
                     CircuitCreator.ListOfComponents[UniqueName][contact.thisCollider.name] = nodeLocation;
-                    /*foreach (KeyValuePair<string, string> kvp in ComponentScript.NodeList[UniqueName])
+                   /* foreach (KeyValuePair<string, string> kvp in CircuitCreator.ListOfComponents[UniqueName])
                     {
 
                         Debug.Log("Key = " + kvp.Key + " Value = " + kvp.Value);
                     }*/
 
 
-                }
+                
                 exitCount = 0;
-            }
+                }
         }
     }
 
@@ -88,13 +75,13 @@ public class NodeScript : MonoBehaviour
             if (other.gameObject.CompareTag("BreadBoardHoles"))
             {
                 string nodeLocation = other.collider.gameObject.GetComponent<HoleScript>().UniqueName;
-                print(this.gameObject.GetComponent<Properties>().UniqueName + " exiting " /* + nodeLocation*/);
+                print(this.GetComponentInParent<Properties>().UniqueName + " exiting " /* + nodeLocation*/);
                 exitCount++;
-                var CircuitScript = this.GetComponent<ComponentScript>();
-                CircuitScript.ClearData = true; //change clear data to only clear this component***
+                var ComponentScript = this.GetComponentInParent<ComponentScript>();
+                ComponentScript.ClearData = true; //change clear data to only clear this component***
                 this.gameObject.GetComponent<Rigidbody>().freezeRotation = false;
                 this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                CircuitScript.AddedToDictionary = false;
+                ComponentScript.AddedToDictionary = false;
             }
         }
     }

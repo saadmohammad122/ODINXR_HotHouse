@@ -6,6 +6,7 @@ using SpiceSharp.Simulations;
 using SpiceSharp;
 using UnityEngine.UI;
 using SpiceSharp.Validation;
+using System;
 
 
 public class CircuitCreator : MonoBehaviour
@@ -20,10 +21,17 @@ public class CircuitCreator : MonoBehaviour
         public Dictionary<string, Dictionary <string, string> > ListOfComponents = new Dictionary<string, Dictionary<string, string>>();
         public Circuit mainCircuit;
         public Camera fpsCam;
-        public GameObject SweepButton;
         public Text test;
         public Circuit testCircuit;
         public System.Random numberGenerator;
+        private Circuit ACCircuit;
+        public GameObject VoltButton;
+        public GameObject AmpsButton;
+        public GameObject ResistButton;
+
+
+
+    private Sine newSinWave;
 
     // Start is called before the first frame update
 
@@ -36,12 +44,28 @@ public class CircuitCreator : MonoBehaviour
     void Start()
         {
 
-            mainCircuit = new Circuit(new VoltageSource("V1", "In", "0", 1.0), new Resistor("Wire1", "In", "Row1", 0), new Resistor("Wire2", "Row7", "0", 0));
-
+            mainCircuit = new Circuit();
+            //(new VoltageSource("V1", "In", "0", 1.0), new Resistor("Wire1", "In", "LeftRow1", 0), new Resistor("Wire2", "LeftRow7", "0", 0))
             testCircuit = new Circuit(new VoltageSource("V1", "Row1", "0", 12.0), (new Resistor("Resistor046", "Row1", "Row4", 10000000)), (new Resistor("Ground", "Row4", "0", 0)));
 
+            newSinWave = new Sine(0, 2.0, 1000);
 
-        }
+
+        //ACCircuit = new Circuit(new Circuit(
+        // new VoltageSource("V1", "in", "0", newSinWave), new Resistor("R1", "in", "out", 10.0e3), new Capacitor("C1", "out", "0", 1e-6)));
+        ACCircuit = new Circuit(new VoltageSource("V1", "in", "0", new Pulse(0.0, 5.0, 0.01, 1e-3, 1e-3, 0.02, 0.04)),
+            new Resistor("R1", "in", "out", 10.0e3),
+            new Capacitor("C1", "out", "0", 1e-6));
+
+
+       
+
+
+
+
+
+
+    }
 
     // Update is called once per frame
     void Update()
@@ -60,20 +84,58 @@ public class CircuitCreator : MonoBehaviour
                 if (hit.collider != null)
                 {
 
-                    if (hit.collider.name == SweepButton.name)
+                    if (hit.collider.name == VoltButton.name)
                     {
-                        // Create a DC simulation that sweeps V1 from -1V to 1V in steps of 100mV
-                        var dc = new DC("DC1", "V1", 0, 12.0, 2);
+                        
+                        print(mainCircuit.Count);
 
+                        
+                        // Create a DC simulation that sweeps V1 from -1V to 1V in steps of 100mV
+                        var dc = new DC("DC1", "VoltageSource", 12.0, 12.0, 1);
                         // Catch exported data
                         dc.ExportSimulationData += (sender, args) =>
                         {
-                            var input = args.GetVoltage("Row1"); 
-                            var output = args.GetVoltage("Row4");
+                            var input = args.GetVoltage("+"); 
+                            var output = args.GetVoltage("0");
                             print("\ninput :  " + input + "\n" + "output: " + output);
                         };
                         
                         dc.Run(mainCircuit);
+                        
+                        /*
+                        var ac = new AC("AC-1", new DecadeSweep(1e-2, 1.0e3, 10));
+                        // Make the export
+                        var exportVoltage = new ComplexVoltageExport(ac, "out");
+
+                        // Simulate
+                        ac.ExportSimulationData += (sender, args) =>
+                        {
+                            var output = exportVoltage.Value;
+                            var decibels = 10.0 * Math.Log10(output.Real * output.Real + output.Imaginary * output.Imaginary);
+                            print("output :  " + output + "\n" + "Decibels: " + decibels);
+                        };
+                        ac.Run(ACCircuit);
+                        */
+                        
+                        /*
+                        // Create the simulation
+                        var tran = new Transient("Tran 1", 1e-3, 1);
+
+                        // Make the exports
+                        var inputExport = new RealVoltageExport(tran, "in");
+                        var outputExport = new RealVoltageExport(tran, "out");
+
+                        // Simulate
+                        tran.ExportSimulationData += (sender, args) =>
+                        {
+                            var input = inputExport.Value;
+                            var output = outputExport.Value;
+                            print("\ninput :  " + input + "\n" + "output: " + output);
+
+                        };
+                        tran.Run(ACCircuit);
+                        */
+
                     }
                     new WaitForSecondsRealtime(10);
                 }

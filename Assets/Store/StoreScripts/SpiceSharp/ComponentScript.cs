@@ -81,6 +81,9 @@ public class ComponentScript : MonoBehaviour
                 if ((CircuitScript.ListOfComponents[UniqueName].Count == this.GetComponent<Properties>().numberOfInput) &
                         !DataHasBeenSent)
                 {
+                    print(UniqueName + " datahasbeensent:   " + DataHasBeenSent);
+
+                    print("Got as far as adding to the dictionary 1");
                     SendDataToCircuitCreator();
                     DataHasBeenSent = true;
                 }
@@ -94,9 +97,14 @@ public class ComponentScript : MonoBehaviour
 
     private void SendDataToCircuitCreator()
     {
-        var Attributes = this.GetComponentInParent<Properties>();
+        //var Attributes = this.GetComponentInParent<Properties>();
+        var Attributes = this.GetComponent<Properties>();
         string ComponentType = Attributes.Type;
+        print("In send data to Circuit Creator :  " + ComponentType);
+
         int ComponentValue = Attributes.Value;
+        print("In send data to Circuit Creator value :  " + ComponentValue);
+
         switch (ComponentType)
         {
             case "Resistor":
@@ -104,7 +112,6 @@ public class ComponentScript : MonoBehaviour
                 break;
             // Include other case's for what is considered a component Type;
             default:
-
                 break;
 
         }
@@ -117,9 +124,18 @@ public class ComponentScript : MonoBehaviour
     {
         var CircuitScript = this.GetComponentInParent<CircuitCreator>();
         string UniqueName = this.gameObject.GetComponent<Properties>().UniqueName;
+
+        print("Component Name:   " + ComponentName);
+        print("In:      " + CircuitScript.ListOfComponents[UniqueName]["In"]);
+        print("Out:     " + CircuitScript.ListOfComponents[UniqueName]["Out"]);
+
         Resistor NewResistor = new Resistor(ComponentName, CircuitScript.ListOfComponents[UniqueName]["In"], 
-        CircuitScript.ListOfComponents[UniqueName]["Out"], ComponentValue); 
+        CircuitScript.ListOfComponents[UniqueName]["Out"], ComponentValue);
+        
+        
         CircuitScript.mainCircuit.Add(NewResistor);
+        print("This is the circuit Count:    " + CircuitScript.mainCircuit.Count);
+
         CircuitScript.numOfComponents += 1;
     }
 
