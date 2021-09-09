@@ -69,6 +69,7 @@
     <Compile Include="Assets\Store\StoreScripts\Controllers\PlayerController.cs" />
     <Compile Include="Assets\Store\StoreScripts\FirstPersonAIO.cs" />
     <Compile Include="Assets\Store\StoreScripts\FunctionGenerator\FunctionGenerator.cs" />
+    <Compile Include="Assets\Store\StoreScripts\FunctionGenerator\GeneratorButton.cs" />
     <Compile Include="Assets\Store\StoreScripts\MainMenu\MainMenu.cs" />
     <Compile Include="Assets\Store\StoreScripts\Menu\ComponentAmount.cs" />
     <Compile Include="Assets\Store\StoreScripts\Menu\ComponentNames.cs" />

@@ -5,10 +5,6 @@ using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
-
-    // Start is called before the first frame update
-    
-
     // Take the raycast and check if it hit the UI button, if it does
     //  then we can treat it appropriately and call the onClick()
     public void checkButton(RaycastHit hit)
