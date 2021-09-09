@@ -9,7 +9,7 @@ using SpiceSharp;
 public class ComponentScript : MonoBehaviour
 {
     private int FrameCount = 0;
-    public GameObject component;
+    public GameObject Component;
     public bool DataHasBeenSent = false;
     public bool ClearData = false;
     public string ComponentName;
@@ -25,7 +25,7 @@ public class ComponentScript : MonoBehaviour
        // ComponentName = this.GetComponent<Properties>().UniqueName;
         ComponentValue = this.GetComponent<Properties>().Value;
         var CircuitScript = this.GetComponentInParent<CircuitCreator>();
-        CircuitScript.numOfComponents += 1;
+        CircuitScript.NumOfComponents += 1;
         AddedToDictionary = false;
     }
 
@@ -63,6 +63,7 @@ public class ComponentScript : MonoBehaviour
 
             FrameCount = 0;
             var CircuitScript = this.GetComponentInParent<CircuitCreator>();
+            //print(CircuitScript.mainCircuit.Count);
             string UniqueName = this.gameObject.GetComponent<Properties>().UniqueName;
             if (ClearData)
             {
@@ -77,13 +78,12 @@ public class ComponentScript : MonoBehaviour
             else if (AddedToDictionary) // AddedToDictionary is a temporary filter to prevent components that 
                                         // that are not added to the board from triggering the below If statement.
             {
-
-                if ((CircuitScript.ListOfComponents[UniqueName].Count == this.GetComponent<Properties>().numberOfInput) &
+               
+                if ((CircuitScript.ListOfComponents[UniqueName].Count == this.GetComponent<Properties>().NumberOfInput) &
                         !DataHasBeenSent)
                 {
-                    print(UniqueName + " datahasbeensent:   " + DataHasBeenSent);
-
-                    print("Got as far as adding to the dictionary 1");
+                    //print(UniqueName + " datahasbeensent:   " + DataHasBeenSent);
+                    //print("Got as far as adding to the dictionary 1");
                     SendDataToCircuitCreator();
                     DataHasBeenSent = true;
                 }
@@ -100,13 +100,16 @@ public class ComponentScript : MonoBehaviour
         //var Attributes = this.GetComponentInParent<Properties>();
         var Attributes = this.GetComponent<Properties>();
         string ComponentType = Attributes.Type;
-        print("In send data to Circuit Creator :  " + ComponentType);
+        //print("In send data to Circuit Creator :  " + ComponentType);
 
         int ComponentValue = Attributes.Value;
-        print("In send data to Circuit Creator value :  " + ComponentValue);
+        //print("In send data to Circuit Creator value :  " + ComponentValue);
 
         switch (ComponentType)
         {
+            case "VoltageSource":
+                CreateVoltageSource(ComponentValue);
+                break;
             case "Resistor":
                 CreateResistor(ComponentValue);
                 break;
@@ -120,23 +123,40 @@ public class ComponentScript : MonoBehaviour
 
     }
 
+    private void CreateVoltageSource(int ComponentValue)
+    {
+        var CircuitScript = this.GetComponentInParent<CircuitCreator>();
+        string UniqueName = this.gameObject.GetComponent<Properties>().UniqueName;
+
+        /*print("Component Name:   " + ComponentName + "\n" + "In:      " + CircuitScript.ListOfComponents[UniqueName]["Positive"] + "\n" +
+            "Out:     " + CircuitScript.ListOfComponents[UniqueName]["Negative"]);*/
+
+        VoltageSource NewVoltageSource = new VoltageSource("VoltageSource", CircuitScript.ListOfComponents[UniqueName]["Positive"],
+        CircuitScript.ListOfComponents[UniqueName]["Negative"], Convert.ToDouble(ComponentValue));
+
+
+        CircuitScript.mainCircuit.Add(NewVoltageSource);
+        //print("This is the circuit Count:    " + CircuitScript.mainCircuit.Count);
+
+        CircuitScript.NumOfComponents += 1;
+    }
+
     private void CreateResistor(int ComponentValue)
     {
         var CircuitScript = this.GetComponentInParent<CircuitCreator>();
         string UniqueName = this.gameObject.GetComponent<Properties>().UniqueName;
 
-        print("Component Name:   " + ComponentName);
-        print("In:      " + CircuitScript.ListOfComponents[UniqueName]["In"]);
-        print("Out:     " + CircuitScript.ListOfComponents[UniqueName]["Out"]);
+        /*print("Component Name:" + ComponentName + "\n" + "In:" + CircuitScript.ListOfComponents[UniqueName]["In"] + "\n" +
+            "Out:" + CircuitScript.ListOfComponents[UniqueName]["Out"]);*/
 
         Resistor NewResistor = new Resistor(ComponentName, CircuitScript.ListOfComponents[UniqueName]["In"], 
         CircuitScript.ListOfComponents[UniqueName]["Out"], ComponentValue);
         
         
         CircuitScript.mainCircuit.Add(NewResistor);
-        print("This is the circuit Count:    " + CircuitScript.mainCircuit.Count);
+        //print("This is the circuit Count:    " + CircuitScript.mainCircuit.Count);
 
-        CircuitScript.numOfComponents += 1;
+        CircuitScript.NumOfComponents += 1;
     }
 
     private void RemoveComponent(string ComponentName)

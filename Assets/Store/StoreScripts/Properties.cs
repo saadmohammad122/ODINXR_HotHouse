@@ -11,7 +11,7 @@ public class Properties : MonoBehaviour
     public int RandomInt;
     public string Type;
     public string UniqueName;
-    public int numberOfInput;
+    public int NumberOfInput;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +25,7 @@ public class Properties : MonoBehaviour
         //UniqueName = this.name + CircuitScript.numOfComponents + numberGenerator.Next(1, 1000).ToString();
         var CircuitScript = this.GetComponentInParent<CircuitCreator>();
 
-        UniqueName = this.name  + CircuitScript.numOfComponents.ToString()  + CircuitScript.numberGenerator.Next(1, 10000).ToString();
+        UniqueName = this.name  + CircuitScript.NumOfComponents.ToString()  + CircuitScript.numberGenerator.Next(1, 10000).ToString();
     }
 
     // Update is called once per frame

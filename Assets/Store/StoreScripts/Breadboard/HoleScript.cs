@@ -13,10 +13,5 @@ public class HoleScript : MonoBehaviour
     void Start()
     {
         UniqueName = transform.parent.name + transform.parent.parent.name;
-
-
-        //ColliderBox = GetComponent<BoxCollider>();
-        //ColliderBox.isTrigger = false;
-
     }
 }

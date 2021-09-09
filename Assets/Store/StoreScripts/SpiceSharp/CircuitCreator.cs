@@ -11,27 +11,22 @@ using System;
 
 public class CircuitCreator : MonoBehaviour
  {
-        public int numOfComponents = 1;
+        public int NumOfComponents = 1;
         private int FrameCount = 0;
-    //public Dictionary<string, Dictionary <string, string> > ListOfComponents = new Dictionary<string, Dictionary<string, string>>();
-
-    // Gave ComponentScript the ability to create SpiceSharp Components with the breadboard positioning, and then hand that component to CircuitCreator
-    //public Dictionary<string, SpiceSharp.Components.Component> ListOfComponents = new Dictionary<string, SpiceSharp.Components.Component>();
-        
         public Dictionary<string, Dictionary <string, string> > ListOfComponents = new Dictionary<string, Dictionary<string, string>>();
         public Circuit mainCircuit;
-        public Camera fpsCam;
-        public Text test;
-        public Circuit testCircuit;
+        public Camera FPSCam;
+        public Circuit TestCircuit;
         public System.Random numberGenerator;
         private Circuit ACCircuit;
         public GameObject VoltButton;
         public GameObject AmpsButton;
         public GameObject ResistButton;
-
-
-
-    private Sine newSinWave;
+        public GameObject VoltageSource;
+        public double VoltageValue;
+        public GameObject AmpWire;
+        private string UniqueName;
+        private Sine NewSinWave;
 
     // Start is called before the first frame update
 
@@ -44,16 +39,15 @@ public class CircuitCreator : MonoBehaviour
     void Start()
         {
 
-            mainCircuit = new Circuit();
-            //(new VoltageSource("V1", "In", "0", 1.0), new Resistor("Wire1", "In", "LeftRow1", 0), new Resistor("Wire2", "LeftRow7", "0", 0))
-            testCircuit = new Circuit(new VoltageSource("V1", "Row1", "0", 12.0), (new Resistor("Resistor046", "Row1", "Row4", 10000000)), (new Resistor("Ground", "Row4", "0", 0)));
+            mainCircuit = new Circuit(new Resistor("GroundResistor", "NegativeLeftColliders", "0", 0));
+    
+            TestCircuit = new Circuit(new VoltageSource("V1", "PositiveLeftColliders", "0", 12.0), new Resistor("GroundWire", "NegativeLeftColliders", "0", 0),
+            new Resistor("Wire1", "PositiveLeftColliders", "LeftRow1", 0), new Resistor("Resistor1", "LeftRow1", "LeftRow4", 100), 
+            new Resistor("Resistor2", "LeftRow4", "LeftRow7", 100), new Resistor("AmpWire", "LeftRow7", "NegativeLeftColliders", 0));
 
-            newSinWave = new Sine(0, 2.0, 1000);
+            NewSinWave = new Sine(0, 2.0, 1000);
 
-
-        //ACCircuit = new Circuit(new Circuit(
-        // new VoltageSource("V1", "in", "0", newSinWave), new Resistor("R1", "in", "out", 10.0e3), new Capacitor("C1", "out", "0", 1e-6)));
-        ACCircuit = new Circuit(new VoltageSource("V1", "in", "0", new Pulse(0.0, 5.0, 0.01, 1e-3, 1e-3, 0.02, 0.04)),
+            ACCircuit = new Circuit(new VoltageSource("V1", "in", "0", new Pulse(0.0, 5.0, 0.01, 1e-3, 1e-3, 0.02, 0.04)),
             new Resistor("R1", "in", "out", 10.0e3),
             new Capacitor("C1", "out", "0", 1e-6));
 
@@ -70,14 +64,11 @@ public class CircuitCreator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("i"))
-        {
-            print("'i' key was pressed");
-        }
+        VoltageValue = Convert.ToDouble(VoltageSource.GetComponent<ComponentScript>().ComponentValue);
 
         if (Input.GetMouseButtonDown(0))
         {
-            var ray = fpsCam.ScreenPointToRay(Input.mousePosition);
+            var ray = FPSCam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
@@ -87,20 +78,101 @@ public class CircuitCreator : MonoBehaviour
                     if (hit.collider.name == VoltButton.name)
                     {
                         
-                        print(mainCircuit.Count);
-
+                        //print(mainCircuit.Count);
                         
+                        //print(VoltageValue);
+                        //print(VoltageValue.GetType());
+
                         // Create a DC simulation that sweeps V1 from -1V to 1V in steps of 100mV
-                        var dc = new DC("DC1", "VoltageSource", 12.0, 12.0, 1);
+                        var dc = new DC("DC1", "VoltageSource", VoltageValue, VoltageValue, 1);
+                        var inputExport = new RealVoltageExport(dc, "LeftRow1");
+                        var outputExport = new RealVoltageExport(dc, "LeftRow7");
+
                         // Catch exported data
                         dc.ExportSimulationData += (sender, args) =>
                         {
-                            var input = args.GetVoltage("+"); 
-                            var output = args.GetVoltage("0");
+                            var input = inputExport.Value;
+                            var output = outputExport.Value;
+
+                            //var input = args.GetVoltage("+"); 
+                            //var output = args.GetVoltage("0");
                             print("\ninput :  " + input + "\n" + "output: " + output);
                         };
-                        
+
                         dc.Run(mainCircuit);
+                        /*try
+                        {
+                            dc.Run(mainCircuit);
+                        }
+                        catch (Exception e)
+                        {
+                            var rules = mainCircuit.Validate();
+                            if (rules.ViolationCount > 0)
+                            {
+                                // We have rules that were violated
+                                foreach (var violation in rules.Violations)
+                                {
+                                    mainCircuit.
+                                    print(violation.Rule);
+                                }
+                            }*/
+
+                        //return new ValidationResult(false, $"Illegal characters or {e.Message}");
+
+
+                    }
+
+                    if (hit.collider.name == AmpsButton.name)
+                    {
+
+                        //print(mainCircuit.Count);
+
+                        // Create a DC simulation that sweeps V1 from -1V to 1V in steps of 100mV
+                        var dc = new DC("DC1", "VoltageSource", VoltageValue, VoltageValue, 1);
+                        var inputExport = new RealVoltageExport(dc, "PositiveLeftColliders");
+                        var outputExport = new RealVoltageExport(dc, "NegativeLeftColliders");
+                        var currentExport = new RealPropertyExport(dc, AmpWire.GetComponent<Properties>().UniqueName, "i");
+
+                        // Catch exported data
+                        dc.ExportSimulationData += (sender, args) =>
+                        {
+                            var input = inputExport.Value;
+                            var output = outputExport.Value;
+                            var current = currentExport.Value;
+
+                            //var input = args.GetVoltage("+"); 
+                            //var output = args.GetVoltage("0");
+                            print("\ninput :  " + input + "\n" + "output: " + output + "\ncurrent" + current);
+                        };
+
+                        dc.Run(mainCircuit);
+                        
+                    }
+
+                    /*if (hit.collider.name == ResistButton.name)
+                    {
+                        mainCircuit.Add(new Resistor("ResistResistor", "LeftRow7", "NegativeLeftColliders", 0));
+
+                        // Create a DC simulation that sweeps V1 from -1V to 1V in steps of 100mV
+                        var dc = new DC("DC1", "VoltageSource", VoltageValue, VoltageValue, 1);
+                        var inputExport = new RealVoltageExport(dc, "LeftRow1");
+                        var outputExport = new RealVoltageExport(dc, "LeftRow7");
+                        var resistanceExport = new RealPropertyExport(dc, "ResistResistor", "r");
+
+                        // Catch exported data
+                        dc.ExportSimulationData += (sender, args) =>
+                        {
+                            var input = inputExport.Value;
+                            var output = outputExport.Value;
+                            var resistance = resistanceExport.Value;
+
+                            //var input = args.GetVoltage("+"); 
+                            //var output = args.GetVoltage("0");
+                            print("Resistance" + resistance);
+                        };
+
+                        dc.Run(mainCircuit);
+                    }*/
                         
                         /*
                         var ac = new AC("AC-1", new DecadeSweep(1e-2, 1.0e3, 10));
@@ -116,7 +188,7 @@ public class CircuitCreator : MonoBehaviour
                         };
                         ac.Run(ACCircuit);
                         */
-                        
+
                         /*
                         // Create the simulation
                         var tran = new Transient("Tran 1", 1e-3, 1);
@@ -136,55 +208,12 @@ public class CircuitCreator : MonoBehaviour
                         tran.Run(ACCircuit);
                         */
 
-                    }
-                    new WaitForSecondsRealtime(10);
+                        //}
+                        new WaitForSecondsRealtime(10);
                 }
             }
             
         }
-
-        //public IEnumerable<IRuleViolation> Violations { get; }
-
-        //private void UpdateSpiceSharp()
-        //{
-
-
-        // Spice sharp will have a List of components, that is made up of "Spicesharp.Components".
-        //      ie: List: (Resistor r1, Resistor r2, VoltageSource v1, ...) 
-
-        // Idea 1: 
-        //  Two Dictionaries in Circuit Creator, one is updated by the front end components and the other is updated periodocially. 
-        //      Initalize Dict1 and Dict2 to be equal. 
-        //      Here, if Dict1 (updated by FEC) is changed, there is a period of time where Dict2 is not updated. 
-        //      Find which index Dict2 is different than Dict1, and push that change to Spicesharp so that you don't have to update the whole list. 
-
-        // Idea 2: 
-        //  If there is any change to the circuit at all, clear the old circuit and create a new circuit for spice sharp to operate on. 
-
-
-
-        //}
-
-        /*private float Sweep(float Ckt)
-        {
-            var Ckt = new Circuit();
-            var dc = new DC("DC 1", "V1", -1.0, 1.0, 0.2);
-
-            // Create exports
-            var inputExport = new RealVoltageExport(dc, "in");
-            var outputExport = new RealVoltageExport(dc, "out");
-            var currentExport = new RealPropertyExport(dc, "V1", "i");
-
-            // Catch exported data
-            dc.ExportSimulationData += (sender, args) =>
-            {
-                var input = inputExport.Value;
-                var output = outputExport.Value;
-                var current = currentExport.Value;
-            };
-            dc.Run(Ckt);
-            return Ckt;
-        }*/
     }
 }
 
