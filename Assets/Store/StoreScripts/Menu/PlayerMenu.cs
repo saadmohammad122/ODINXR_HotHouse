@@ -57,8 +57,8 @@ public class PlayerMenu : MonoBehaviour
     private void SetMenuPosition()
     {
         transform.position = LeftHand.transform.position + LeftHand.transform.forward;
-
-        transform.rotation = LeftHand.transform.localRotation;
+        // took out rotation as that was messing with snap turn provider
+        //transform.rotation = LeftHand.transform.localRotation;
     }
 
     // Checks the rotation of the left hand, returns true if it is flipped over

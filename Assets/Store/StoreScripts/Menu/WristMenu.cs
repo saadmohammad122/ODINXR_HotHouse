@@ -11,7 +11,8 @@ public class WristMenu : MonoBehaviour
     private int ArraySize;
 
     private TextMeshProUGUI ComponentName;
-    private Transform ComponentContainer;
+    //private Transform ComponentContainer;
+    public GameObject ComponentContainer;
     private GameObject CurrentComponent;
 
     private void Awake()
@@ -21,7 +22,7 @@ public class WristMenu : MonoBehaviour
         if (ComponentName == null)
             Debug.Log("Could not find Component Name");
 
-        ComponentContainer = transform.Find("ComponentContainer");
+        //ComponentContainer = transform.Find("ComponentContainer");
         if (ComponentContainer == null)
             Debug.Log("Could not find ComponentContainer");
 
@@ -126,7 +127,7 @@ public class WristMenu : MonoBehaviour
 
             // Make the new component appear
             ComponentIndex++;
-            DisplayComponent(ComponentContainer);
+            DisplayComponent(ComponentContainer.transform);
         }
     }
 
@@ -140,7 +141,7 @@ public class WristMenu : MonoBehaviour
 
             // Make the new component appear
             ComponentIndex--;
-            DisplayComponent(ComponentContainer);
+            DisplayComponent(ComponentContainer.transform);
         }
     }
 
