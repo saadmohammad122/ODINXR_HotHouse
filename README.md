@@ -2,7 +2,7 @@
 
 
 
-[alt text] (https://github.com/saadmohammad122/ODINXR_HotHouse/blob/main/Pictures/20210722-CIEAccelerator-JoeJ0035.jpg?raw=true)
+![alt text] (https://github.com/saadmohammad122/ODINXR_HotHouse/blob/main/Pictures/20210722-CIEAccelerator-JoeJ0035.jpg?raw=true)
 This is a GitHub organization that I created to help streamline communications within our team. 
 
 Our rapid development required us to create multiple branches to explore different features, and merge them when necessary. 
