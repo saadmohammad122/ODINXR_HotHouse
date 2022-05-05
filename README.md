@@ -14,4 +14,4 @@ Towards the end of my time at the company, we culminated all of our important wo
 Our guidelines were to document everything, write concise summaries and clear descriptions, and name any co-authors to our code. 
 
 ![alt text](https://github.com/saadmohammad122/ODINXR_HotHouse/blob/main/Pictures/components.jpg?raw=true)
-)
+
