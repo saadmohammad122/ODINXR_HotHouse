@@ -1,8 +1,10 @@
 # ProjectWorldTree
-A github for common files needed for the research team to stay informed and updated.
+
+This is a GitHub organization that I created to help streamline communications within our team. 
+
+Our rapid development required us to create multiple branches to explore different features, and merge them when necessary. 
+
+Towards the end of my time at the company, we culminated all of our important work into the ChristianVR branch, to be used as a demo location.
+Our guidelines were to document everything, write concise summaries and clear descriptions, and name any co-authors to our code. 
 
 
-There are a few resources to understand the github better. If you are not part of the software team,
-please do not pull or push any files. Pulling the latest files for testing is done with permission from Tessa. If you don't know, feel free to ask! :)
-
-Remember, document everything. Write concise summaries, clear descriptions, and name any co-authors to your code; your work should be traceable. 
